@@ -1,0 +1,135 @@
+<style type="text/css">
+  body { background: rgba(0,0,0, 0.3); }
+  header { background: rgba(0,0,0, 0.6); color: #fff; }
+    .main_wrap a { text-decoration: underline; }
+    .outter_wrap { }
+    #workout_plan { table-layout: fixed; background-color: #fff; padding: 10px; }
+    #workout_plan th { background:#37474F; color: #fff; padding: 5px; min-width: 100px; font-size: 14px;}
+    #workout_plan td { padding: 5px; min-width: 100px; font-size: 18px; }
+    .White, .Red, .Orange, .LightBlue, .LightGreen, .LightGrey, .BlueGrey { border:1px solid grey; padding: 10px 10px; margin: 5px auto;}
+    .White { background:#fff;}.Red{background:#FFCDD2;}.Orange{background:#FFE0B2;}.LightBlue{background:#81D4FA;}.LightGreen{background:#B2DFDB;}.LightGrey{background:#E0E0E0;}.BlueGrey{background:#B0BEC5;}
+    pre { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word;}
+    .note_text { font-size: 12px; }
+    
+    td.image { width:110px; text-align: center; }
+    td.exercise { text-align:left; }
+
+    .item_wrap { display: inline-block; padding: 15px; margin: 5px; width: 150px; vertical-align: top; padding-bottom: 125px; padding-top: 10px; }
+
+    .item_data { position: relative; ; width: 150px; }
+
+    .item_name { height: 45px; margin-bottom: 5px; }
+
+    .set_wrap { font-family: Consolas, monospace; font-size: 12px; }
+
+    .set_item { border-top: 1px solid #bbb; height: 60px; margin-bottom: 10px; padding-top: 10px; margin-top: 5px; }
+    .set_name { text-align: center; margin-bottom: 10px; }
+    .set_image { text-align: center; }
+    .set_image img { width: 85%; }
+    .set_note { font-size: 12px; min-height: 115px; margin-top: 15px; }
+    .set_data { text-align: left; margin-top: 5px; color: black;  }
+
+</style>
+<div class="main_wrap-[!layout_style!]">
+  <header class="my_account_header_wrap">
+    <div class="user_photo">
+      <img ng-src="/render_img?client?thumb?[! user_name !]">
+    </div><!-- . user_photo -->
+    <div class="account_user_welcome">
+      <p><span style="font-size:28px;">Hello [!client_name!],</span><p>
+      </p>My &nbsp; Workout Plan</p>
+      <div class="header_user_name">[!user_name!]</div>
+    </div>
+  </header><!-- . my_account_header_wrap - -->
+  <a ng-href='/my_account/my_workout'><button>Back</button></a>
+
+  <button ng-click="print_workout()">Print</button>
+
+   <p id="print_line1">[!item.program_date!]&nbsp;&nbsp;[!item.muscles!]&nbsp;&nbsp;[!item.client_email!]</p>
+  <p id="print_line2">[!item.general_explanation!]</p>
+
+
+
+  <div class="outter_wrap">
+    <div class="item_wrap" ng-repeat="exercise in item.workout" ng-class="exercise.exercise_color">
+      <div class="item_data">
+        <div class="item_name"><a href="/exercise_detail/?data_id=[!exercise.exercise_id!]" target="_blank">[!exercise.name!]</a></div>
+        <div class="set_image">
+          <img ng-src="/render_img?exercise?thumb?[!exercise.exercise_id!]"></div>
+
+  <div class="set_note">[!exercise.notes!]</div>
+  
+
+      <div class="set_wrap">
+
+        <div class="set_item">
+          <div class="set_name">Warm Up</div>
+          <div class="set_data">[!exercise.warmup_set!]</div>
+        </div>
+
+        <div class="set_item">
+          <div class="set_name">Set 1</div>
+          <div class="set_data">[!exercise.set1!]</div>
+        </div>
+
+        <div class="set_item">
+          <div class="set_name">Set 2 </div>
+          <div class="set_data">[!exercise.set2!]</div>
+        </div>
+
+        <div class="set_item">
+           <div class="set_name">Set 3</div>
+           <div class="set_data">[!exercise.set3!]</div>
+         </div>
+
+        <div class="set4 set_item" ng-show="table_length>=4">
+           <div class="set_name">Set 4</div>
+           <div class="set_data">[!exercise.set4!]</div>
+         </div>
+
+        <div class="set5 set_item"  ng-show="table_length>=5">
+           <div class="set_name">Set 5 </div>
+           <div class="set_data">[!exercise.set5!]</div>
+        </div>
+
+      </div><!-- . set_wrap - -->
+   
+    </div>
+  </div><!-- .item_wrap -->
+
+    </div><!-- .outter_wrap -->
+
+
+
+
+  <div class="outter_wrap">
+    <table id="workout_plan">
+
+      <tr>
+        <th>Image</th>
+        <th>Exercise</th>
+        <th>Warm up sets</th>
+        <th>Set 1</th>
+        <th>Set 2</th>
+        <th>Set 3</th>
+        <th class="set4" ng-show="table_length>=4">Set 4</th>
+        <th class="set5" ng-show="table_length>=5">Set 5</th>
+      </tr>
+
+      <tr ng-repeat="exercise in item.workout" ng-class="exercise.exercise_color">
+            <td class="image"><img style="width:100px;" ng-src="/render_img?exercise?thumb?[!exercise.exercise_id!]"></td>
+            <td class="exercise"><a href="/exercise_detail/?data_id=[!exercise.exercise_id!]" target="_blank">[!exercise.name!]</a><br><span class="note_text">[!exercise.notes!]</span></td>
+            <td><pre>[!exercise.warmup_set!]</pre></td>
+            <td><pre>[!exercise.set1!]</pre></td>
+            <td><pre>[!exercise.set2!]</pre></td>
+            <td><pre>[!exercise.set3!]</pre></td>
+            <td class="set4" ng-show="table_length>=4"><pre>[!exercise.set4!]</pre></td>
+            <td class="set5"  ng-show="table_length>=5"><pre>[!exercise.set5!]</pre></td>
+      </tr><!-- .exercise_list -->
+
+    </table>
+    </div><!-- .outter_wrap -->
+
+    <button ng-click="print_workout()">Print</button>
+    <p>For Firefox and IE users to print the background color, please check the “Print Background Colors” on the Print dialog that is popped up.</p>
+  </div><!-- .main_wrap -->
