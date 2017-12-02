@@ -1,0 +1,76 @@
+<style>
+  body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }
+.content_wrap { background-color: rgba(0,0,0, 0.6); color: #fff; text-align: center; padding: 20px; padding-bottom: 5px; width: 425px; margin: 0 auto; border: 1px solid white; }
+.content_wrap span { font-size: 24px; }
+  table { width: 100%; }
+  tr { height: 32px; }
+  td.label { font-size: 14px; text-align: right; padding-right: 10px; width: 75px; }
+  td.input { font-size: 14px; text-align: left; padding-left: 10px; width: 175px; }
+  input[name="client_name"],input[name="client_phone"],input[name="cc_number"]{ width: 225px; height: 16px; }
+  textarea { width: 225px; height: 50px; }
+  .form_title{ background-color: rgba(0,0,0, 0.5); padding: 5px 0; color:#fff; text-align:center; width: 100%; margin-bottom: 25px; border: 1px solid #999; }
+  .payment-errors{ border: 1px solid red; font-size: 14px; padding: 10px; content: white; margin-bottom: 15px; }
+  table.card_info { border-top: 1px solid #81C784; padding-top: 25px; margin-top: 25px; }
+  .stripe_img{ margin: 25px auto; text-align: center; border-top: 1px solid #81C784; padding-top: 25px; margin-bottom: 45px; }
+  .submit_button_wrap { margin-top: 25px; }
+  button[type='submit']{ border-radius: 3px; padding: 10px; font-size: 12px; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+  <article class="content_wrap">
+    <div class="form_title">
+      <h3>[!program_chosen!] Program</h3>
+      <h3>Price: $[!price!]/month</h3>
+    </div>
+    <form action="/charge_card/" id="payment-form" method="post">
+      <div class="payment-errors_wrap"></div>
+      <span class="payment-errors" ng-show="program_status=='Active'&&stripe_cus_id&&stripe_subscription_id">You have already enrolled in a program.</span>
+    <table class="address_info">
+      <tr>
+        <td class="label">Name*</td>
+        <td class="input"><input type="text" name="client_name" required/></td>
+      </tr>
+      <tr class="hide">
+        <td class="label">Email*</td>
+        <td class="input"><input type="text" name="client_email" ng-model="client_email" required/></td>
+      </tr>
+      <tr class="hide">
+        <td class="label">Program*</td>
+        <td class="input"><input type="text" name="client_program" ng-model="program_chosen" required/></td>
+      </tr>
+      <tr class="hide">
+        <td class="label">Price*</td>
+        <td class="input"><input type="text" name="amout" ng-model="price" required/></td>
+      </tr>     
+      <tr>
+        <td class="label">Phone</td>
+        <td class="input"><input type="text" name="client_phone" /></td>
+      </tr>   
+      <tr>
+        <td class="label">Address</td>
+        <td class="input"><textarea type="text" name="client_address"></textarea></td>
+      </tr>
+    </table>
+    <table class="card_info">
+      <tr>
+        <td class="label">Card Number*</td>
+        <td class="input"><input type="text" name="cc_number" size="20" data-stripe="number"/></td>
+      </tr>
+      <tr>
+        <td class="label">CVC*</td>
+        <td class="input"><input type="text" size="4" data-stripe="cvc"/></td>
+      </tr>
+      <tr>
+        <td class="label">Expiration (MM/YYYY)*</td>
+        <td class="input">
+          <input type="text" size="2" data-stripe="exp-month"/>
+          <span> / </span>
+          <input type="text" size="4" data-stripe="exp-year"/>
+        </td>
+      </tr>
+     </table>
+      <div class="submit_button_wrap">
+        <button type="submit" ng-disabled="program_status=='Active'&&stripe_cus_id&&stripe_subscription_id">Subscribe to Program</button></div>
+    </form>
+    <div class="stripe_img"><img style="width:150px;" src='/pics/stripe.png'></div>
+  </article><!-- - /form_wrap - -->
+  </div><!-- . main_wrap -->
