@@ -1,0 +1,64 @@
+ <style>
+body { background: rgba(0,0,0, 0.3); }
+
+header.hi { color: #000; }
+
+
+.my_info_wrap { max-width: 400px; margin: 0 auto; margin-top: 15px; padding-bottom: 75px; }
+.my_info_data { border: 1px solid #fff; border-radius: 3px; text-align: left; background: rgba(0,0,0, 0.6); color: #fff; padding: 15px; }
+
+.img_wrap { text-align: center; margin-top: 20px; margin-bottom: 15px; }
+.red { color: red; }
+
+table { border-spacing: 10px; }
+tr { height: 32px; }
+td.label { font-size: 14px; text-align: right; padding-right: 10px;color: #999; }
+td.input { }
+td img{ max-width: 70px; }
+input[type="text"] { width: 200px; height: 18px; }
+
+.edit_button_wrap { text-align: center; margin-bottom: 15px; margin-top: 30px; }
+
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+   <header class="hi" ng-show="!if_edit"><span class="color_b">Add New Testimonial</span></header>
+   <header class="hi" ng-show="if_edit"><span class="color_b">Edit Testimonial</span></header>
+  <div class="my_info_wrap">
+    <div class="my_info_data">
+      <form action="/manage/add_testimonial" enctype="multipart/form-data"  method="post">
+        <table>
+          <tr class="hide">
+            <td class="label">data_id</td>
+            <td class="input"><input type="text" name="data_id" ng-model='data_id' ng-required="if_edit" ></td>
+          </tr>
+          <tr>
+            <td class="label">Name*</td>
+            <td class="input"><input type="text" name="client_name" ng-model="item.client_name" required/></td>
+          </tr>
+          <tr>
+            <td class="label">Comment*</td>
+            <td class="input"><textarea rows="20" cols="32" name="testimonial_text"  ng-model="item.testimonial_text" required></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Photo</td>
+            <td class="input"><input type="file" name="testimonial_photo"/></td>
+          </tr>
+          <tr ng-if="item.has_photo">
+            <td class="label">
+             <img ng-src="[! item.has_photo?'/render_img?testimonial?thumb?'+item.data_id : '' !]">
+             </td>
+            <td class="input"></td>    
+          </tr>     
+
+        </table>
+
+        <div class="edit_button_wrap">
+        <a href="/my_account/my_testimonial"><button type="button">Cancel</button></a>
+              <input type="submit" value="Save" />
+      </div><!-- . edit_button_wrap - -->
+
+
+      </form>
+    </div><!--.my_info_data-->
+  </div><!-- . my_info_wrap - -->
+  </div><!-- - .main_wrap - --> 
