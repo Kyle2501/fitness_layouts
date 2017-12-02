@@ -1,0 +1,43 @@
+ <style>
+  tr { height: 32px; }
+  td.label { font-size: 14px; text-align: right; padding-right: 10px; }
+  input[type="text"] { width: 200px; height: 16px; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+   <header class="hi" ng-show="!if_edit"><span class="color_b">Add New Testimonial</span></header>
+   <header class="hi" ng-show="if_edit"><span class="color_b">Edit Testimonial</span></header>
+   <article class="form_wrap">
+      <form action="/manage/add_testimonial" enctype="multipart/form-data"  method="post">
+        <table>
+          <tr class="hide">
+            <td class="label">data_id</td>
+            <td class="input"><input type="text" name="data_id" ng-model='data_id' ng-required="if_edit"/></td>
+          </tr>
+          <tr>
+            <td class="label">Name*</td>
+            <td class="input"><input type="text" name="client_name" ng-model="item.client_name" required/></td>
+          </tr>
+          <tr>
+            <td class="label">Comment*</td>
+            <td class="input"><textarea rows="20" cols="32" name="testimonial_text"  ng-model="item.testimonial_text" required></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Photo</td>
+            <td class="input"><input type="file" name="testimonial_photo"/></td>
+          </tr>
+          <tr>
+            <td class="label">
+             <img ng-src="[! item.has_photo?'/render_img?testimonial?thumb?'+item.data_id : '' !]">
+             </td>
+            <td class="input"></td>         
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <a href="/manage/testimonial"><button type="button">Cancel</button></a>
+              <input type="submit" value="Save" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- - . main_wrap - --> 
