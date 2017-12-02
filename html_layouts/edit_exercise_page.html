@@ -1,0 +1,63 @@
+<style>
+  tr { height: 32px; }
+  td.label { font-size: 14px; text-align: right; padding-right: 10px; }
+  td img{max-width:70px;}
+  input[type="text"] { width: 200px; height: 16px; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+   <header class="hi" ng-show="!if_edit"><span class="color_b">Add New Exercise</span></header>
+   <header class="hi" ng-show="if_edit"><span class="color_b">Edit Exercise</span></header>
+    <article class="form_wrap">
+      <form name="exercise_form" action="../../manage/add_exercise" enctype="multipart/form-data" method="post">
+        <table>
+          <tr class="hide">
+            <td class="label">data_id</td>
+            <td class="input"><input type="text" name="data_id" ng-model='data_id' ng-required="if_edit"/></td>
+          </tr>
+          <tr>
+            <td class="label">Name*</td>
+            <td class="input"><input type="text" name="exercise_name" ng-model='exercise_name' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Difficulty Level*</td>
+            <td class="input">
+              <select name="difficulty_level" ng-model='difficulty_level' required>
+                <option ng-repeat='level in difficulty_levels' value="[!level.name!]">[!level.name!]</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Equipment Type*</td>
+            <td class="input">
+              <select name="equipment_type" ng-model='equipment_type' required>
+                <option ng-repeat='equipment in equipments' value="[!equipment.name!]">[!equipment.name!]</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Muscle Targeted*</td>
+            <td class="input">
+              <label ng-repeat="muscle in muscles">
+                <input type="checkbox" name="muscle_targeted" value="[!muscle.name!]" ng-model="muscle.selected" ng-click="toggle_selection()" ng-required="!if_any_selected"> [!muscle.name!]<br>
+              </label>            
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Photo</td>
+            <td class="input"><img ng-src="/render_img?exercise?thumb?[!data_id!]"></td>
+          </tr>
+          <tr>
+            <td class="label"></td>
+            <td class="input"><input type="file" name="exercise_photo"/></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <a href="/manage/exercise"><button type="button">Cancel</button></a>
+              <input type="submit" ng-disabled='exercise_form.$invalid' value="Save" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- - . main_wrap - -->edit_exercise_page.html
