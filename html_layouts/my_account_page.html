@@ -1,0 +1,54 @@
+<style>
+body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }
+
+header { background: rgba(0,0,0, 0.6); color: #fff; }
+
+.list_wrap { max-width: 550px; margin: 0 auto; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding: 15px; background:rgba(0,0,0, 0.6); color: #fff; }
+.list_wrap-mobile { }
+.list_wrap-desktop {  min-width: 350px; }
+
+
+.option_wrap { border-bottom: 1px solid #fff; padding: 25px; }
+.option_wrap a { color: #fff; }
+
+.option_wrap:hover { border-bottom: 1px solid #aaa; padding: 25px; }
+.option_wrap a:hover { color: #ddd; }
+
+
+</style>
+  <div class="main_wrap-[!layout_style!]">
+
+    <header class="my_account_header_wrap">
+      <div class="user_photo">
+        <img ng-src="/render_img?client?thumb?[! user_name !]">
+      </div><!-- . user_photo -->
+      <div class="account_user_welcome">
+        <p><span style="font-size:28px;">Hello [!client_name!],</span><p>
+        </p>My Account</p>
+        <div class="header_user_name">[!user_name!]</div>
+      </div>
+    </header><!-- . my_account_header_wrap - -->
+
+    <div class="list_wrap list_wrap-[!layout_style!]">
+      <div class="option_wrap">
+        <a href="/my_account/my_workout">My Workout Plan</a>
+        <a href="/my_account/my_workout"><button>Open</button></a>
+      </div>
+      <div class="option_wrap">
+        <a href="/my_account/my_info">My Info</a>
+        <a href="/my_account/my_info"><button>Open</button></a>
+      </div>
+      <div class="option_wrap">
+        <a href="/my_account/my_program">My Program</a>
+        <a href="/my_account/my_program"><button>Open</button></a>
+      </div>
+      <div class="option_wrap">
+        <a href="/my_account/my_testimonial">My Results</a>
+        <a href="/my_account/my_testimonial"><button>Open</button></a>
+      </div>
+      
+    </div><!-- .list_wrap -->
+
+
+
+  </div><!-- .main_wrap -->
