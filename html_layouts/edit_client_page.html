@@ -1,0 +1,62 @@
+<style>
+  tr { height: 32px; }
+  td.label { font-size: 14px; text-align: right; padding-right: 10px; }
+  td img{max-width:70px;}
+  input[type="text"] { width: 200px; height: 16px; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+   <header class="hi"><span class="color_b">Edit Client [!item.client_email!]<span></header>
+    <article class="form_wrap">
+      <form action="../../manage/add_client" enctype="multipart/form-data" method="post">
+        <table>
+          <tr class="hide">
+            <td class="label">Email</td>
+            <td class="input"><input type="email" name="client_email" ng-model='item.client_email' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Name*</td>
+            <td class="input"><input type="text" name="client_name" ng-model='item.client_name' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Client Program*</td>
+            <td class="input">
+              <select ng-model='item.client_program' name="client_program" required>
+                <option ng-repeat="program in programs" value="[!program.name!]">[!program.name!]</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Program Status*</td>
+            <td class="input">
+              <select ng-model='item.program_status' name="program_status" required>
+                <option ng-repeat="status in program_status_list" value="[!status!]">[!status!]</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Phone</td>
+            <td class="input"><input type="text" name="client_phone" ng-model='item.client_phone'/></td>
+          </tr>
+          <tr>
+            <td class="label">Address</td>
+            <td class="input"><input type="text" name="client_address" ng-model='item.client_address'/></td>
+          </tr>
+          <tr>
+            <td class="label">Photo</td>
+            <td class="input"><input type="file" name="client_photo"/></td>
+          </tr>
+          <tr>
+            <td class="label"><img ng-src="[! item.has_photo?'/render_img?client?thumb?'+item.client_email : '' !]"></td>
+            <td class="input"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <a href="/manage/client"><button type="button">Cancel</button></a>
+              <input type="submit" value="Save" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- - . main_wrap - -->
