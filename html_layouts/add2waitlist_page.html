@@ -1,0 +1,35 @@
+<div class="main_wrap-[!layout_style!]">
+    <p>You will be added to the Waitlist for [!program_chosen!] Program ($[!price!]/month).</p>
+    <article class="form_wrap">
+      <form action="/manage/add_waitlist" method="post">
+        <table>
+          <tr>
+            <td class="label">Name</td>
+            <td class="input"><input type="text" name="client_name" required/></td>
+          </tr>
+          <tr class="hide">
+            <td class="label">Program</td>
+            <td class="input"><input type="text" name="client_program" ng-model='program_chosen' required/></td>
+          </tr>
+          <tr class="hide">
+            <td class="label">Email</td>
+            <td class="input"><input type="text" name="client_email" ng-model='client_email' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Phone (optional)</td>
+            <td class="input"><input type="text" name="client_phone"/></td>
+          </tr>
+          <tr>
+            <td class="label">Adress (optional)</td>
+            <td class="input"><input type="text" name="client_address"/></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <a href='/programs'><button type='button'>Cancel</button></a>
+              <input type="submit" value="Yes" /></td>
+          </tr>
+        </table>
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- . main_wrap -->
