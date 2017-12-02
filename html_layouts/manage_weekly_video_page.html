@@ -1,0 +1,71 @@
+<style type="text/css">
+pre { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word; }
+.testimonial_wrap { border: 1px solid grey; border-radius: 3px; text-align: left; padding: 10px; margin-top: 15px; }
+
+
+.item_wrap { display: inline-block; width: 100%; }
+.item_data { position: relative; margin: 5px; padding: 5px; border: 1px solid grey; border-radius: 3px; height: 195px; }
+.item_name { }
+.item_icon { overflow: hidden; outline: 1px solid #eee; position: absolute; top: 35px; left: 15px; width: 125px; bottom: 25px; }
+.icon_data { overflow: hidden; }
+.icon_data img { width: 100%; }
+.item_text { position: absolute; outline: 1px solid #eee; right: 20px; width: 140px; padding: 10px; top: 10px; bottom: 75px; font-size: 12px; }
+.item_date { position: absolute; bottom: 5px; left: 5px; font-size: 12px; }
+.item_buttons { position: absolute; right: 15px; bottom: 5px; text-align: right; }
+    
+    
+
+.show_btn { color: steelblue; }
+.testimonial_thumb { max-width: 100px; }
+.modal-backdrop { position: fixed; top: 0; left: 0; bottom: 0; right: 0;  z-index: 150;  background:rgba(0,0,0, 0.6); }
+.modal { position: absolute; top: 25px; z-index: 200; text-align: center; margin: auto auto; max-height: 90%; max-width: 90%; }
+#lg_img { max-height: 600px; max-width: 800px; margin: auto auto; }
+
+
+@media screen and (min-width: 550px) {
+.list_wrap { margin: 0 auto; width: 450px; }
+}
+
+@media screen and (min-width: 750px) {
+.item_wrap { width: 50%; }
+.list_wrap { width: 750px; }
+}
+
+@media screen and (min-width: 900px) {
+.list_wrap { width: 850px; }
+}
+
+</style>
+  <div class="main_wrap-[!layout_style!]">
+  
+  <div class="list_wrap">
+  
+    <a href='/publish/weekly_video'><button>Add A New Weekly Video</button></a>
+    <hr>
+
+    <div class="modal-backdrop" ng-show="modal_show"></div>
+    <div class="modal" ng-show="modal_show">
+      <img id="lg_img" ng-src='[!lg_img_url!]'>
+      <button ng-click="hide_lg_img()">Close</button>
+    </div>
+
+    <div class="item_wrap" ng-repeat="item in weekly_video_data | orderBy: '-add_time'">
+        <div class="item_data">
+          <div class="item_name">[!item.video_name!]</div>
+          <div class="item_icon"><div class="icon_data">
+            <img ng-src="/render_img?weekly_video?thumb?[!item.data_id!]">
+          </div></div>
+          <div class="item_text">[!item.video_text!]</div>
+          <div class="item_date">added on [!item.video_date!]</div>
+          <div class="item_buttons">
+            <button ng-click="delete(item.data_id)">Remove</button>
+            &nbsp;
+            <a ng-href='/edit/weekly_video?[!item.data_id!]'><button>Edit Info</button></a>
+            <br />
+            <button ng-click="setCurrent(item.data_id)">set Current</button>
+          </div><!-- . item_buttons - -->
+        </div><!-- . item_data - -->
+      </div><!-- . item_wrap -->
+     </div><!-- . list_wrap - -->
+
+  </div><!-- . main_wrap - -->
