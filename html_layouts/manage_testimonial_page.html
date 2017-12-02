@@ -1,0 +1,27 @@
+<style type="text/css">
+    pre { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word; }
+    .testimonial_wrap { border: 1px solid grey; border-radius: 3px; text-align: left; padding: 10px; margin-top: 15px; }
+    .show_btn { color: steelblue; }
+    .testimonial_thumb { max-width: 100px; }
+    .modal-backdrop { position: fixed; top: 0; left: 0; bottom: 0; right: 0;  z-index: 150;  background:rgba(0,0,0, 0.6); }
+    .modal{position: absolute; top:25px; z-index: 200; text-align: center; margin: auto auto; max-height:90%; max-width:90%;}
+    #lg_img{max-height: 600px; max-width: 800px; margin: auto auto;}
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+    <a href='/publish/testimonial'><button>Add A New Testimonial</button></a>
+    <hr>
+
+    <div class="modal-backdrop" ng-show="modal_show"></div>
+    <div class="modal" ng-show="modal_show">
+      <img id="lg_img" ng-src='[!lg_img_url!]'>
+      <button ng-click="hide_lg_img()">Close</button>
+    </div>
+
+    <div class="testimonial_wrap" ng-repeat="item in testimonial_data | orderBy: '-add_time'">
+      <testimonial-view></testimonial-view>
+      <br>
+      <a ng-href='/edit/testimonial?[!item.data_id!]'><button>Edit Info</button></a>
+      <button ng-click="delete(item.data_id)">Remove</button>
+    </div><!-- . testimonial_wrap -->
+
+  </div><!-- . main_wrap - -->
