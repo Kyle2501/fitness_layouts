@@ -1,0 +1,180 @@
+<style>
+  .form_wrap, .small_form_wrap{width:90%;margin:auto; }
+  .small_form_wrap { padding:0; border: 1px solid #ccc; }
+  tr { height: 32px; overflow-x:auto; }
+  td.label { font-size: 14px; text-align: right; padding-right: 10px; }
+  td.input { font-size: 14px; text-align: left; padding-left: 10px; }
+  input[type="text"] { width: 200px; height: 16px; }
+  .modal{ position: absolute; top: 0; z-index: 200;  padding: 25px; background: #fff; text-align: center; margin: auto; }
+  .modal-backdrop{position: fixed; top: 0; left: 0; bottom: 0; right: 0;  z-index: 100;  background: rgba(0,0,0, 0.6); }
+  .main_wrap a { text-decoration:underline; }
+  .outter_wrap { width: 100%; overflow-x:scroll; }
+  .workout_plan { width: 1200px; table-layout: fixed; }
+  .workout_plan th { background:#37474F; color: #fff; padding: 5px; min-width: 100px; }
+  .workout_plan td { padding: 5px; min-width: 100px; }
+  .White, .Red, .Orange,.LightBlue, .LightGreen, .LightGrey, .BlueGrey { border:1px solid grey; padding: 10px 10px; margin: 5px auto; }
+  .White{background:#fff;}.Red{background:#FFCDD2;}.Orange{background:#FFE0B2;}.LightBlue{background:#81D4FA;}.LightGreen{background:#B2DFDB;}.LightGrey{background:#E0E0E0;}.BlueGrey{background:#B0BEC5;}
+  .btn_wrap{margin: 25px auto;}
+  pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word;}
+  .button_wrap { border: 1px solid #bbb; border-radius: 3px; padding: 3px; font-size: 14px; width: 50px; margin: 5px; text-align: center; cursor: pointer; }
+  .button_wrap:hover { border: 1px solid #555; }
+  </style>
+
+  <div class="main_wrap-[!layout_style!]">
+   <header ng-show="!if_edit" class="hi"><span class="color_b">Add a New Template</span></header>
+   <header ng-show="if_edit" class="hi"><span class="color_b">Edit Template [!item.template_name!]</span></header>
+    <article class="form_wrap">
+      <form ng-submit="save_workout_plan()" method="post">
+        <table>
+          <tr class="hide">
+            <td class="label">Datd ID</td>
+            <td class="input"><input type="text" name="client_email" ng-model='item.data_id' ng-required="if_edit" ></td>
+          </tr>
+          <tr>
+            <td class="label">Template Name</td>
+            <td class="input"><input type="text" name="template_name" ng-model='item.template_name' required/></td>
+          </tr>
+         
+
+           <tr>
+            <td class="label">Muscles</td>
+            <td class="input"><input type="text" name="muscles" ng-model='item.muscles_array' required/></td>
+          </tr>
+          <tr>
+            <td class="label">General Explanation</td>
+            <td class="input"><textarea rows="3" cols="30" name="general_explanation" ng-model='item.general_explanation' placeholder="e.g. Super Sets with 90 second- 2 min Rest Between"> </textarea></td>
+          </tr>
+        </table>
+
+        <div class="outter_wrap">
+          <table class="workout_plan">
+
+          <tr>
+            <th>Index</th>
+            <th>Exercise</th>
+            <th>2 Warm up sets</th>
+            <th>Set 1</th>
+            <th>Set 2</th>
+            <th>Set 3</th>
+            <th>Set 4</th>
+            <th>Set 5</th>
+            <th>Image</th>
+            <th>Delete</th>
+            <th>Edit</th>
+          </tr>
+
+          <tr ng-repeat="exercise in item.workout" ng-class="exercise.exercise_color">
+                <td><pre>[!$index+1!]</pre></td>
+                <td>
+                  <a href="/exercise_detail/?data_id=[!exercise.exercise_id!]" target="_blank">[!exercise.name!]</a>
+                  <br>[!exercise.notes!]
+                </td>
+                <td><pre>[!exercise.warmup_set!]</pre></td>
+                <td><pre>[!exercise.set1!]</pre></td>
+                <td><pre>[!exercise.set2!]</pre></td>
+                <td><pre>[!exercise.set3!]</pre></td>
+                <td><pre>[!exercise.set4!]</pre></td>
+                <td><pre>[!exercise.set5!]</pre></td>
+                <td><img style="width:100px;" ng-src="/render_img?exercise?thumb?[!exercise.exercise_id!]"></td>
+                <td><button type="button" ng-click="del_workout($index)">X</button></td>
+                <td><button type="button" ng-click="edit_workout($index)">Edit</button></td>
+          </tr><!-- .exercise_list -->
+          </table>
+        </div><!-- .outter_wrap -->
+
+
+        <div class="btn_wrap">
+          <button type="button" ng-click="new_workout()">Add an Exercise</button>
+          <button type="button" ng-click="if_insert = true;new_workout()">Insert an Exercise</button>
+        </div><!-- - .btn_wrap - -->
+
+        <div class="btn_wrap">
+          <a href="/manage/template"><button type="button">Cancel</button></a>
+          <input type="submit" value="Save">
+        </div><!-- - .btn_wrap - -->
+      </form>
+    </article><!-- - /form_wrap - -->
+
+    <div class="modal" ng-show="if_modal_show">
+      <article class="small_form_wrap">
+        <form  method="post" ng-submit="add_workout()">
+         <table>
+          <tr>
+            <td class="label">Exercise Name</td>
+            <td class="input">
+              <input type="text" placeholder="e.g. Push Ups" ng-model='select_name'>
+            </td>
+          </tr>
+          <tr>
+            <td class="label"></td>
+            <td class="input">
+              <select ng-model='tmp.exercise_id' name="exercise_name" required>
+                <option ng-repeat="exercise in exercise_array | filter: select_name | orderBy: this[0]" value="[!exercise[1]!]">[!exercise[0]!]</option>
+              </select>
+            </td>
+          </tr>
+          <tr ng-show="if_insert">
+            <td class="label">Insert Index</td>
+            <td class="input">
+              <select ng-model='tmp.exercise_idx' name="exercise_idx" required>
+                <option ng-repeat="$index in item.workout | orderBy: $index" value="[!$index!]">[!$index+1!]</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Exercise Color</td>
+            <td class="input">
+              <select ng-model='tmp.exercise_color' name="exercise_color">
+                <option ng-repeat="color in color_list" value="[!color!]">[!color!]</option>
+              </select>
+            </td>
+          </tr>
+
+           <tr>
+            <td class="label">Muscles</td>
+            <td class="input"><input type="text" name="muscles" ng-model='item.muscles_array' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Notes</td>
+            <td class="input"><textarea rows="3" cols="30" name="notes" ng-model='tmp.notes' placeholder="e.g. 2*SUPERSET (Weight in heel)"></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Warm up set</td>
+            <td class="input"><textarea rows="3" cols="30" name="warmup_set" ng-model='tmp.warmup_set'></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Set 1</td>
+            <td class="input"><textarea rows="3" cols="30" name="set1" ng-model='tmp.set1' ></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Set 2</td>
+            <td class="input"><textarea rows="3" cols="30" name="set2" ng-model='tmp.set2' ></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Set 3</td>
+            <td class="input"><textarea rows="3" cols="30" name="set3" ng-model='tmp.set3' ></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Set 4</td>
+            <td class="input"><textarea rows="3" cols="30" name="set4" ng-model='tmp.set4' ></textarea></td>
+          </tr>
+          <tr>
+            <td class="label">Set 5</td>
+            <td class="input"><textarea rows="3" cols="30" name="set5" ng-model='tmp.set5' ></textarea></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <button type="button" ng-click="if_modal_show=flase;if_insert=false;">Cancel</button>
+              <input type="submit" value="Add" />
+            </td>
+          </tr>
+        </table>
+        </form>
+      </article><!-- - .small_form_wrap - -->
+      <button type="button" ng-click="if_modal_show=flase;if_insert=false;">Close</button>
+    </div><!--.modal-->
+
+    <div class="modal-backdrop" ng-show="if_modal_show"></div>
+
+  </div><!-- - .main_wrap - -->
