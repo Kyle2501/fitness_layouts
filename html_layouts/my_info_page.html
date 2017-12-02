@@ -1,0 +1,44 @@
+<style type="text/css">
+body { background: rgba(0,0,0, 0.3); }
+
+header { background: rgba(0,0,0, 0.6); color: #fff; }
+
+.my_info_wrap { max-width: 400px; margin: 0 auto; margin-top: 15px;  }
+.my_info_data { border: 1px solid #fff; border-radius: 3px; text-align: left; background: rgba(0,0,0, 0.6); color: #fff; padding: 15px; }
+
+.img_wrap { text-align: center; margin-top: 20px; }
+.text_wrap { width: 75%; margin: 0 auto; }
+
+.red { color: red; }
+.label { color: #999; }
+
+.edit_button_wrap { text-align: center; margin-bottom: 15px; margin-top: 30px; }
+
+@media screen and (min-width: 800px){
+      .client_data {  }
+    }
+
+
+  </style>
+<div class="main_wrap-[!layout_style!]">
+  <div class="my_info_wrap">
+    <div class="my_info_data">
+
+      <div class="img_wrap">
+        <img ng-src="[! item.has_photo?'/render_img?client?thumb?'+item.client_email : '' !]">
+      </div><!--.img_wrap-->
+
+      <div class="text_wrap">
+        <p><span class="label">Name</span> &nbsp; <span class="red">|</span> &nbsp; [! item.client_name !]</p>
+        <p><span class="label">Phone</span> &nbsp; <span class="red">|</span> &nbsp; [! item.client_phone !]</p> 
+        <p><span class="label">Address</span> &nbsp; <span class="red">|</span> &nbsp; [! item.client_address !]</p> 
+      </div><!--.text_wrap-->
+
+
+      <div class="edit_button_wrap">
+        <a ng-href='/my_account/edit_my_info'><button ng-disabled="btn_disable">Edit Info</button></a>
+      </div><!-- . edit_button_wrap - -->
+
+    </div><!--.my_info_data-->
+  </div><!-- . my_info_wrap - -->
+</div><!-- .main_wrap -->
