@@ -1,0 +1,27 @@
+  <div class="main_wrap-[!layout_style!]">
+    <header class="hi"><span class="color_b">Upload Video for Weekly</span></header>
+    <article class="form_wrap">
+      <form action="{0}" enctype="multipart/form-data" method="post">
+        <table>
+        
+          <tr class="hide">
+            <td class="label">data_id</td>
+            <td class="input"><input type="text" name="data_id" ng-model='data_id' required/></td>
+          </tr>
+
+          <tr>
+            <td class="label">Upload Video</td>
+            <td class="input"><input type="file" name="video_file"/></td>
+          </tr>
+          
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <a href="/manage/weekly_video"><button type="button">Cancel</button></a>
+              <input type="submit" value="Upload Weekly Video" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- - . main_wrap - -->
