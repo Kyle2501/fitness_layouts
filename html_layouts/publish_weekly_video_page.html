@@ -1,0 +1,50 @@
+<style>
+.main_wrap-desktop { padding-top: 30px; }
+.form_wrap { margin: 0 auto; width: 425px; position: relative; }
+.form_wrap table { margin-bottom: 25px; }
+tr { height: 32px; }
+td.label { text-align: right; padding-right: 10px; }
+td.input input { width: 100%; height: 20px; }
+td.input textarea { width: 100%; height: 45px; }
+.form_wrap footer { position: absolute; bottom: 0; right: 0; padding: 10px; }
+</style>
+  <div class="main_wrap-[!layout_style!]">
+    <header class="hi"><span class="color_b">
+      <span ng-show="!if_edit">Publish</span>
+      <span ng-show="if_edit">Edit</span>
+      Video for Weekly
+    </span></header>
+    <article class="form_wrap">
+      <form action="../../manage/add_weekly_video" enctype="multipart/form-data" method="post">
+        <table>
+        
+          <tr class="hide">
+            <td class="label">data_id</td>
+            <td class="input"><input type="text" name="data_id" ng-model='data_id' ng-required="if_edit" /></td>
+          </tr>
+          
+          <tr>
+            <td class="label">Video Name</td>
+            <td class="input"><input type="text" name="video_name" ng-model="item.video_name"/></td>
+          </tr>
+          
+          <tr>
+            <td class="label">Video Text</td>
+            <td class="input"><textarea name="video_text" ng-model="item.video_text"></textarea></td>
+          </tr>
+          
+          <tr>
+            <td class="label">Image File</td>
+            <td class="input"><input type="file" name="image_file"/></td>
+          </tr>
+        </table>
+          
+        <footer>
+          <a href="/manage/weekly_video"><button type="button">Cancel</button></a>
+          <span ng-show="!if_edit"><input type="submit" value="Add Weekly Video" /></span>
+          <span ng-show="if_edit"><input type="submit" value="Save Edit" /></span>
+        </footer>
+        
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- - . main_wrap - -->  
