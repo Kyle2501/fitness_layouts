@@ -1,0 +1,123 @@
+<style type="text/css">
+    #exercise_wrap { width: 100%; }
+    #initial_category_wrap, .select_category_wrap, .select_data_wrap{width: 20%; display: inline-block; vertical-align: top; margin: 15px 5px; padding-left: 5px; padding-right: 5px; } 
+    .select_category_wrap { border: 1px solid grey; }
+    .select_data_wrap { width: 73%; }
+    .exercise_data{border: 1px solid grey; border-radius: 3px; text-align: left; padding: 10px; margin-bottom: 15px; }
+    .img_wrap { width: 15%; margin-top: 5px; }
+    .img_wrap img { max-width: 100px; vertical-align: middle; }
+    .text_wrap { width: 75%; }
+    .text_wrap p { font-size: 12px; margin: 5px auto; }
+    .img_wrap, .text_wrap { display: inline-block; vertical-align: top; }
+    .blue { font-size: 14px; color: steelblue; }
+    @media screen and (max-width: 800px){
+      #initial_category_wrap, .select_category_wrap, .select_data_wrap { width: 95%; margin: auto; }
+      .img_wrap { width: 30%; }
+      .text_wrap { width: 63%; }
+    }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+    <a href='/publish/exercise'><button>Add A New Exercise</button></a>
+    <hr>
+    <div class="input-group">
+      <p>
+        Sort by: 
+        <select  ng-model="sortBy" ng-init="sortBy = 'exercise_name' ">
+            <option value="exercise_name" ng-selected>Exercise Name(&#8593;)</option>
+            <option value="-exercise_name">Exercise Name(&#8595;)</option>
+            <option value="equipment_type">Equipment Type(&#8593;)</option>
+            <option value="-equipment_type">Equipment Type(&#8595;)</option>
+            <option value="add_time">Add Time(&#8593;)</option>
+            <option value="-add_time">Add Time(&#8595;)</option>
+        </select>
+      </p>
+    </div><!-- .input-group -->
+
+  <div id="exercise_wrap">
+    <div class="select_category_wrap">
+
+      <form ng-submit='sel_by_name()'>
+        <label>Seach by Name:</label><br>
+        <input type="text" placeholder="e.g. Push Ups" ng-model='select_name' ng-change='sel_by_name()'>
+        <input class="hide" type="submit" value="Submit" />
+      </form>
+
+      <div class="show_more" ng-show="hide_more_fliters">
+        <hr>
+        <p ng-click='hide_more_fliters=false;'><b>More Filters <i class="fa fa-chevron-down" aria-hidden="true"></i></b></p>
+      </div> <!-- . show_more -->
+
+      <div class="muscle_targeted_filter" ng-show="!hide_more_fliters">
+        <hr>
+        <p><b>Muscle Targeted</b></p>
+        <label>
+          <input type="checkbox" name="select_all" value="all" ng-click="select_all_muscles()" class="hide"> Select All<br>        
+        </label> 
+        <label>
+          <input type="checkbox" name="deselect_all" value="deselect_all" ng-click="deselect_all_muscles()" class="hide"> Deselect All<br>        
+        </label>  
+        <label ng-repeat="muscle in muscles">
+          <input type="checkbox" value="[!muscle.name!]" ng-model="muscle.selected" ng-click="toggle_muscle_selection(muscle.name)"> [!muscle.name!]<br>   
+        </label> 
+      </div> <!-- . muscle_targeted_filter -->
+
+      <div class="equipment_type_filter" ng-show="!hide_more_fliters">
+        <hr>
+        <p><b>Equipment Type</b></p> 
+        <label>
+          <input type="checkbox" name="select_all" value="all" ng-click="select_all_equipments()" class="hide"> Select All<br>        
+        </label> 
+        <label>
+          <input type="checkbox" name="deselect_all" value="deselect_all" ng-click="deselect_all_equipments()" class="hide"> Deselect All<br>        
+        </label>  
+        <label ng-repeat="equipment in equipments">
+          <input type="checkbox" value="[!equipment.name!]" ng-model="equipment.selected" ng-click="toggle_equipment_selection(equipment.name)"> [!equipment.name!]<br>   
+        </label> 
+      </div><!-- . equipment_type_filter --> 
+      
+      <div class="difficulty_level_filter" ng-show="!hide_more_fliters">
+        <hr>
+        <p><b>Difficulty Level</b></p> 
+        <label>
+          <input type="checkbox" name="select_all" ng-click="select_all_levels()" class="hide"> Select All<br>        
+        </label> 
+        <label>
+          <input type="checkbox" name="deselect_all" ng-click="deselect_all_levels()" class="hide"> Deselect All<br>        
+        </label>  
+        <label ng-repeat="level in difficulty_levels">
+          <input type="checkbox" value="[!level.name!]" ng-model="level.selected" ng-click="toggle_level_selection(level.name)"> [!level.name!]<br>   
+        </label> 
+      </div><!-- . difficulty_level_filter --> 
+
+      <div class="show_less" ng-show="!hide_more_fliters&&small_window">
+        <hr>
+        <p ng-click='hide_more_fliters=true;'><b>Less Filters <i class="fa fa-chevron-up" aria-hidden="true"></i></b></p>
+      </div>  <!-- . show_less --> 
+    </div><!-- . select_category_wrap-->
+
+    <div class="select_data_wrap">
+      <p>Find [! (display_data| filter: select_name).length!] exercise(s)</p>
+      <hr>
+      <div class="exercise_data" ng-repeat="item in display_data | orderBy: sortBy | filter:select_name">
+        <div class="text_wrap">
+          <p>  <span class="blue">[! item.exercise_name !]</span> </p>  
+          <p> Level: <span class="blue">[! item.difficulty_level !] </span></p>
+          <p> Equipment Type:<span class="blue">  [! item.equipment_type !]</span> </p> 
+          <p> Muscle Targeted: <span class="blue"> [! item.muscle_targeted !]</span> </p> 
+          <p> Add Time: <span class="blue"> [! item.add_time | limitTo: 10 !]</span> </p>
+          <p> User:<span class="blue"> [! item.user_name !]</span> </p>
+          <p ng-show='item.exercise_video_key'> <a ng-href="/view_video/[!item.exercise_video_key!]" target="_blank"> View Video </a></p>
+        </div><!-- . text_wrap-->
+
+        <div class="img_wrap">
+          <img ng-src="/render_img?exercise?thumb?[!item.data_id!]">
+        </div><!-- . img_wrap-->
+
+        <br>
+        <a ng-href='/edit/exercise?[!item.data_id!]'><button>Edit Info</button></a>
+        <a ng-href='/publish/exercise_video?[!item.data_id!]'><button>Edit Video</button></a>
+        <button ng-click="delete(item.data_id)">Delete</button>
+      </div><!-- . exercise_data-->
+    </div><!-- . select_data_wrap-->
+  </div><!-- . exercise_wrap-->
+  </div><!-- . main_wrap -->
