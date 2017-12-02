@@ -1,0 +1,77 @@
+<style>
+  body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }
+
+header { background:rgba(0,0,0, 0.6); color: #fff; }
+    .client_data { border: 1px solid grey; text-align: left; padding: 10px; margin: 15px auto 0 auto; width: 425px;}
+    .img_wrap { text-align: center; margin: 15px; }
+    .text_wrap { color: #333; margin-top: 5px; margin-bottom: 10px; }
+    .text_wrap div { margin-bottom: 5px; font-size: 14px; letter-spacing: .08em; }
+    .text_wrap span { color: red; }
+    .text_wrap label { color: #888; text-align: right; width: 125px; display: inline-block; font-size: 12px; }
+    .client_option_buttons { text-align: center; border-top: 1px solid white; padding-top: 10px; margin-top: 15px; }
+    .item_data { display: inline-block; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+   <header class="hi"><span class="color_b">View Client [!item.client_email!]<span></header>
+    <div class="client_data">
+        <div class="img_wrap">
+          <img ng-src="[! item.has_photo?'/render_img?client?thumb?'+item.client_email : '' !]">
+        </div><!-- . img_wrap -->
+        <div class="text_wrap">
+
+        <div class="client_name">
+            <label>Client Name</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_name !]</div>
+          </div><!-- . client_name - -->
+
+          <div class="client_email">
+            <label>Client Email</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_email !]</div>
+          </div><!-- . client_email - -->
+
+          <div class="client_phone">
+            <label>Client Phone</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_phone !]</div>
+          </div><!-- . client_phone - -->
+
+          <div class="client_address">
+            <label>Client Address</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_address !]</div>
+          </div><!-- . client_address - -->
+
+          <div class="add_date">
+            <label>Add Date</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.add_time | limitTo: 10 !]</div>
+          </div><!-- . add_date - -->
+
+          <div class="client_program">
+            <label>Client Program</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_program !]</div>
+          </div><!-- . client_program - -->
+
+          <div class="program_status">
+            <label>Program Status</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.program_status !]</div>
+          </div><!-- . program_status - -->
+
+          <div class="stripe_cus_id">
+            <label>CID ( Stripe )</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.stripe_cus_id !]</div>
+          </div><!-- . stripe_cus_id - -->
+
+          <div class="stripe_subscription_id">
+            <label>SID ( Stripe )</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.stripe_subscription_id !]</div>
+          </div><!-- . stripe_subscription_id - -->
+
+        </div><!-- . text_wrap-->
+
+        <div class="client_option_buttons">
+        
+          <a ng-href='/edit/client?[!item.client_email!]'>
+            <button ng-disabled="btn_disable">Edit Info</button>
+          </a>
+
+        </div><!-- . client_option_buttons - -->
+      </div><!-- . client_data -->
+  </div><!-- - . main_wrap - -->
