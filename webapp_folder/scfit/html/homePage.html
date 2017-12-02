@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo" ng-controller="Ctrl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>{{ page_name }} - {{ Site }}</title>
+  <link rel="stylesheet" href="../../files/fonts.css" type="text/css" />
+  <link href="//fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style type="text/css">
+  body { font-family: 'Lato', sans-serif;  background-color: rgba(255,255,255,0.9); color: #777; }
+  .hide { display: none; }
+
+  button, input[type="submit"] { color: #333; background-color: #fff; cursor: pointer; display: inline-block; margin: 5px; font-weight: normal; text-align: center; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-image: none; border: 1px solid #ccc; white-space: nowrap; padding: 3px 9px; font-size: 14px; line-height: 1.42857143; border-radius: 4px;-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+  button:hover, input[type="submit"]:hover{ background-color: #eee; }
+  button:disabled, input:disabled { background: #ddd; color:#aaa; }
+
+  .top_bar { position: fixed; left: 0; right: 0; top: 0; width:100%; z-index: 100;  height: 40px; padding-top: 10px; padding-bottom: 10px; }
+  .right_btn_wrap { position: fixed; top: 10px; right: 0; z-index: 175; }
+  .black_bg { background: #000; border-bottom: 1px solid #ddd; }
+  .white_bg { background: rgba(255,255,255,0.8); }
+
+
+.username_wrap { position: fixed; top: 35px; right: 15px; font-size: 10px; color: #999; z-index: 200; }
+
+  .dropbtn, .right_btn { cursor: pointer; vertical-align: top; font-size: 26px; }
+  .dropdown { margin: auto 15px auto 0; }
+  .dropdown { position: relative; display: inline-block; z-index: 175; }
+  .dropdown-content { display: none; position: absolute; right: 0; background-color: #f9f9f9; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); }
+  .dropdown-content a, .dropdown-content p { color: black; padding: 12px 16px; text-decoration: none; display: block; }
+  .dropdown-content p { border-bottom: 1px solid #ccc; }
+  .dropdown-content a:hover { background-color: #f1f1f1; }
+  .dropdown:hover .dropdown-content { display: block; }
+  .dropdown:hover .dropbtn { color: #ccc; }
+
+
+  .fa { display: inline-block; font: normal normal normal 18px/1 FontAwesome; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  /* .fa:hover { color: white; } */
+
+  .left_aside .main_nav { margin-top: 80px; text-align: right; width: 90%; height: 90%; overflow-y: auto; padding-right: 15px; }
+  .left_aside .main_nav ul { padding: 0; margin: 0; }
+  .left_aside .main_nav li { list-style: none; padding-right: 12px; border-right: 3px solid #000; margin-bottom: 25px; }
+  .left_aside .main_nav li:hover { border-right: 3px solid red; color: #fff; }
+  .left_aside .main_nav li#{{ page_id }}Nav{ border-right: 3px solid red; color: #fff; }
+  .left_aside .main_nav a { text-decoration: none; color: #888; }
+
+  .nav_graphic { cursor: pointer; position: fixed; bottom: 10px; left: 25px; font-family: 'EntypoRegular'; font-size: 46px; display: inline-block; margin-left:5px; margin-right: 5px;}
+
+  .color_a { color: #B2DFDB; }
+  .color_b { color: #657b83; }
+
+  .main_wrap-desktop { max-width: 1000px; margin: 0 auto; padding-top: 60px; margin-left: 200px; }
+  .main_wrap-mobile { width: 100%; padding-top: 60px; margin-bottom: 75px; }
+
+  .page_wrap {  }
+  .page_wrap a { color: #268bd2; text-decoration: none; }
+
+  .main_wrap img { width: 98%; }
+
+  header.hi { margin: 25px; font-size: 32px; padding: 10px; border-bottom: 1px solid red; color: #aaa; letter-spacing: .08em; padding-left: 25px; word-wrap:break-word; }
+
+  .form_wrap { margin-left: 55px; margin-top: 35px; outline: 1px solid #eee; width: 345px; padding: 45px; }
+
+  .footer_bar-mobile { display: block; }
+  .footer_bar-desktop { display: none; }
+  .footer_bar_wrap { position: fixed; bottom: 0; left: 0; right: 0; height: 40px; background-color: black; padding: 10px; }
+
+.option_wrap { border-bottom: 1px solid red; padding: 25px; }
+.option_wrap a { color: white; }
+.option_wrap button { float: right; }
+
+  @media screen and (max-width: 1000px) {
+    /*.top_bar{background: #000; border-bottom: 1px solid #ddd;}*/
+    .main_wrap { }
+    .form_wrap { width: 92%; margin: auto; padding: 0; outline: none; };
+  }
+  </style>
+
+{{ analytics|safe }}
+<script type="text/javascript" src="../../files/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="../../files/angular1.5.min.js"></script>
+{% if page_id == 'payment' or page_id == 'change_credit_card' %} 
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+{%endif%}
+{% if page_id == 'contact' %} 
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+{%endif%}
+
+<script type="text/javascript">
+  {%if page_id == 'payment' or page_id == 'change_credit_card' %}
+    Stripe.setPublishableKey('pk_live_1xsx9m5yTbbWOo98DOFGuEcr');
+    jQuery(function($) {
+      $('#payment-form').submit(function(event) {
+        var $form = $(this);
+        // Disable the submit button to prevent repeated clicks
+        $form.find('button').prop('disabled', true);
+        Stripe.card.createToken($form, stripeResponseHandler);
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+    });
+
+    function stripeResponseHandler(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        // and submit
+        $form.get(0).submit();
+      }
+    };
+  {%endif%}
+
+  {% if page_id == 'exercise_detail' %}
+  // video controls
+  window.onload = function() {
+
+    var video = document.getElementById("video");
+
+    var playButton = $("#play-pause");
+    var muteButton = $("#mute");
+    var fullScreenButton = $("#full-screen");
+
+    var seekBar = $("#seek-bar");
+    var volumeBar = $("#volume-bar");
+
+    //video click play-pause 
+    video.addEventListener("click", function() {
+      if (video.paused == true) {
+        video.play();
+        playButton.html("<i class='fa fa-pause'></i>");
+      } else {
+        video.pause();
+        playButton.html("<i class='fa fa-play'></i>");
+      }
+    });
+
+    //play-pause button
+    playButton.on("click", function() {
+      if (video.paused == true) {
+        video.play();
+        playButton.html("<i class='fa fa-pause'></i>");
+      } else {
+        video.pause();
+        playButton.html("<i class='fa fa-play'></i>");
+      }
+    });
+
+    //mute button
+    muteButton.on("click", function() {
+      if (video.muted == false) {
+        video.muted = true;
+        muteButton.html("<i class='fa fa-volume-up'></i>");
+      } else {
+        video.muted = false;
+        muteButton.html("<i class='fa fa-volume-off'></i>");
+      }
+    });
+
+    //full-screen button
+    fullScreenButton.on("click", function() {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen(); // Firefox
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen(); // Chrome and Safari
+      }
+    });
+
+    // seek bar click
+    seekBar.on("change", function() {
+      var time = video.duration * (seekBar.val() / 100);
+      video.currentTime = time;
+      if(seekBar.val() > 99.9 ){
+        playButton.html("<i class='fa fa-play'></i>");
+      }
+      else{
+        playButton.html("<i class='fa fa-pause'></i>");      
+      }
+    });
+
+    // Update the seek bar as the video plays
+    video.addEventListener("timeupdate", function() {
+      var value = (100 / video.duration) * video.currentTime;
+      seekBar.val(value);
+      if(seekBar.val() > 99.9 ){
+        playButton.html("<i class='fa fa-play'></i>");
+      }
+      else{
+        playButton.html("<i class='fa fa-pause'></i>");  
+      }
+    });
+
+    // Pause the video when the slider handle is being dragged
+    seekBar.on("mousedown", function() {
+      video.pause();
+    });
+
+    // Play the video when the slider handle is dropped
+    seekBar.on("mouseup", function() {
+      video.play();
+    });
+
+    // Event listener for the volume bar
+    volumeBar.on("change", function() {
+      video.volume = volumeBar.val();
+      if(volumeBar.val() <0.01 ){
+        video.muted = true;
+        muteButton.html("<i class='fa fa-volume-up'></i>");
+      }
+      else {
+        video.muted = false;
+        muteButton.html("<i class='fa fa-volume-off'></i>");
+      }
+    });
+  }
+  {%endif%}
+</script>
+
+<script>
+var demo = angular.module("demo", [],
+  function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[!');
+    $interpolateProvider.endSymbol('!]');
+})
+
+demo.controller('Ctrl', function($scope, $http, $sce) {
+  $scope.layout_style = 'desktop';
+  if(window.innerWidth < 1000){ $scope.layout_style = 'mobile'; }
+  
+</script>
+
+<style>
+
+.layout_type_wrap { position: fixed; bottom: 15px; left: 25px; z-index: 110; font-size: 10px; }
+.layout_type_wrap span { cursor: pointer; margin: 7px; color: #999; }
+.layout_type_wrap span:hover { color: red; }
+
+.login_wrap { position: fixed; z-index: 210; top: 20px; right: 50px; font-size: 12px; }
+.login_wrap a { color: #888; text-decoration: none; }
+.login_wrap a:hover { color: red; }
+
+.left_aside { position: fixed; left: 0; top: 0; bottom: 0; width: 185px; border-right: 1px solid #888; height: 100%; background: black; z-index: 90; overflow: hidden; }
+.logo_wrap { font-size: 14px; position: fixed; top: 15px; left: 20px; width: 140px; text-align: center; line-height: 18px; letter-spacing: .09em; color: #fff; }
+.logo_wrap a { color: #839496; text-decoration: none; }
+.logo_wrap a:visited { color: #839496; }
+.top_wrap { position: absolute; top: 0; left: 0; right: 0; height: 70px; width: 175px;}
+.sub_title { border-top: 1px solid #eee; }
+.social_wrap { padding-top: 10px; }
+.social_wrap a { color: #fff; padding-left: 15px; }
+.social_wrap a:hover { color: #444; }
+
+.nav_button_wrap { position: fixed; right: 15px; bottom: 15px; z-index: 210; cursor: pointer; }
+.nav_button_wrap .fa { font-size: 28px; color: red; }
+.hide_nav_button { position: fixed; right: 15px; bottom: 70px; cursor: pointer; }
+
+.mobile_nav_wrap { background-color: black; height: 205px; position: fixed; bottom: 60px; border-bottom: 1px solid #eee; left: 0; right: 0; }
+
+.mobile_nav_data { padding: 10px; }
+.mobile_nav_data .main_nav ul { padding: 0; margin: 0; text-align: right; }
+.mobile_nav_data .main_nav li { list-style: none; padding-right: 12px; border-right: 3px solid #000; margin-bottom: 10px; }
+.mobile_nav_data .main_nav li:hover { border-right: 3px solid red; color: #fff; }
+.mobile_nav_data .main_nav li#{{ page_id }}Nav{ border-right: 3px solid red; color: #fff; }
+.mobile_nav_data .main_nav a { text-decoration: none; color: #888; }
+
+.myaccount_wrap { position: fixed; top: 42px; right: 17px; font-size: 11px; text-align: right; letter-spacing: .08em; z-index: 150; }
+.myaccount_wrap a { text-decoration: none; color: #bbb; }
+.myaccount_wrap a:hover { color: red; }
+</style>
+</head>
+<body>
+  <div class="top_bar" ng-class="{'black_bg': layout_style=='mobile'}">
+    <a href="/"><div class="logo_wrap">SHANNY COHEN
+      <div class="sub_title">FITNESS</div>
+    </div><!-- .logo_wrap --></a>
+
+    <div class="login_wrap">
+      <a href="{{ login_key }}">{{ gate }}</a>
+    </div>
+
+    <div class="right_btn_wrap">
+
+      <div class="dropdown">
+        <div class="dropbtn" ><i class="fa fa-user" aria-hidden="true"></i></div>
+        <div class="dropdown-content">
+          {% if user_name != 'No User' %}
+            <p>{{ user_name }}</p> 
+            <a href="/my_account">My Account</a>
+          {% endif %}
+          {% if admin == 'true' %}
+            <a href="/manage">Admin Manage</a>
+          {% endif %}
+          <a href="{{ login_key }}">{{ gate }}</a>
+        </div><!-- - .dropdown-content - -->
+      </div><!-- - .dropdown - -->
+    </div><!-- .right_btn_wrap -->
+
+    {% if user_name != 'No User' %}
+    <div class="myaccount_wrap"><a href="/my_account">{{ user_name }}</a></div>
+    {% endif %}
+
+  </div><!-- - .top_bar - -->
+
+  <aside class="left_aside" ng-show="layout_style=='desktop'">
+    {{ nav_html|safe }}
+  </aside>
+  <main class="page_wrap">
+    {{ page_html|safe }}
+  </main><!-- - .page_wrap - -->
+
+
+    <div class="layout_type_wrap">
+      Layout &nbsp;
+      <span ng-click="layout_style='mobile'"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+      <span ng-click="layout_style='desktop'"><i class="fa fa-desktop" aria-hidden="true"></i></span>
+    </div><!-- . layout_type_wrap - -->
+
+  <div class="footer_bar_wrap footer_bar-[!layout_style!]">
+    <div class="mobile_nav_wrap" ng-show="show_nav=='yes'">
+      <div class="mobile_nav_data">
+        {{ nav_html|safe }}
+        <div class="hide_nav_button" ng-click="show_nav='no'">hide</div>
+      </div><!-- . mobile_nav_data - -->
+    </div><!-- . mobile_nav_wrap - -->
+    <div class="nav_button_wrap">
+      <span ng-click="show_nav='yes'"><i class="fa fa-bars" aria-hidden="true"></i></span>
+    </div>
+  </div><!-- . footer_bar_wrap - -->
+
+</body>
+</html>
