@@ -1,0 +1,46 @@
+<style>
+  .form_wrap { margin-left: 55px; margin-top: 35px; outline: 1px solid #eee; width: 345px;text-align:center;}
+  form{padding: 15px 45px;}
+  tr { height: 32px; }
+  td.label { font-size: 14px; text-align: right; padding-right: 10px; }
+  td.input { font-size: 14px; text-align: left; padding-left: 10px; }
+  .form_title{background: #0D47A1; padding: 10px; color:#fff;}
+  .payment-errors{color:red;}
+  .stripe_img{margin: 25px auto;}
+  button[type='submit']{border-radius:0; padding: 5px; font-size: 12px;}
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+  <article class="form_wrap">
+    <div class="form_title">
+      <h3>Current Card</h3>
+      <h3>****[!current_card_last4!]</h3>
+    </div>
+    <form action="/change_card/" id="payment-form" method="post">
+      <span class="payment-errors"></span>
+      <span class="payment-errors" ng-show="program_status=='Active'&&stripe_cus_id&&stripe_subscription_id">You have already enrolled in a program.</span>
+    <table>  
+      <tr>
+        <td class="label">Card Number*</td>
+        <td class="input"><input type="text" size="20" data-stripe="number"/></td>
+      </tr>
+      <tr>
+        <td class="label">CVC*</td>
+        <td class="input"><input type="text" size="4" data-stripe="cvc"/></td>
+      </tr>
+      <tr>
+        <td class="label">Expiration (MM/YYYY)*</td>
+        <td class="input">
+          <input type="text" size="2" data-stripe="exp-month"/>
+          <span> / </span>
+          <input type="text" size="4" data-stripe="exp-year"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td style="text-align:right"><button type="submit" ng-disabled="program_status=='Active'&&stripe_cus_id&&stripe_subscription_id">Change Card</button></td>
+      </tr>
+     </table>
+    </form>
+    <img class="stripe_img" style="width:200px;" src='/pics/stripe.png'>
+  </article><!-- - /form_wrap - -->
+  </div><!-- .main_wrap -->
