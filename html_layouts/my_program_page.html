@@ -1,0 +1,47 @@
+<style>
+  body { background: rgba(0,0,0, 0.3); }
+header { background:rgba(0,0,0, 0.6); color: #fff; }
+
+.main_wrap1 { background:rgba(0,0,0, 0.6); color: #fff; padding: 15px; }
+
+  .change_program_btn { margin: 10px auto; }
+  .red { color: red; }
+  .label { color: #999; }
+
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+
+    <header class="my_account_header_wrap">
+      <div class="user_photo">
+        <img ng-src="/render_img?client?thumb?[! user_name !]">
+      </div><!-- . user_photo -->
+      <div class="account_user_welcome">
+        <p><span style="font-size:28px;">Hello [!client_name!],</span><p>
+        </p>My Account</p>
+        <div class="header_user_name">[!user_name!]</div>
+      </div>
+    </header><!-- . my_account_header_wrap - -->
+
+    <div class="main_wrap1">
+      <p><span class="label">Program</span> &nbsp; <span class="red">|</span> &nbsp; [!client_program!]</p> 
+      <p ng-show='program_status'><span class="label">Program Status</span> &nbsp; <span class="red">|</span> &nbsp; [!program_status !]</p>
+        <span ng-show="program_status!='Canceled'&&client_program&&stripe_cus_id&&stripe_subscription_id"></span> 
+        <p class="btn_wrap">
+          <button ng-disabled="btn_disable" ng-click="">Pause Program</button>
+          <button ng-disabled="btn_disable" ng-click="cancel_program()">Cancel Program</button>
+          <button ng-disabled="btn_disable" ng-click="program_list_show = program_list_show? false: true;">Change Program</button>
+          <a href="/my_account/change_credit_card"><button ng-disabled="btn_disable">Change Credit Card</button></a>
+        </p>
+
+        <div class="change_program_btn" ng-repeat='(key,value) in program_price_list'>
+          <button ng-disabled="btn_disable" ng-click="change_program(key)" ng-show='program_list_show&&key!=client_program'>[!key!]($[!value!]/month)</button>
+        </div><!--.change_program_btn -->
+        <hr>
+    <div>
+      <p>Waitlist: [!client_waitlist!]</p>
+        <p ng-show='client_waitlist'>Since: [!waitlist_add_time | limitTo: 10!]</p> 
+    </div>
+
+    </div><!-- . main_wrap1 - -->
+    
+  </div><!-- . main_wrap -->
