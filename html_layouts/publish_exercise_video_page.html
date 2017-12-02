@@ -1,0 +1,24 @@
+  <div class="main_wrap-[!layout_style!]">
+    <header class="hi"><span class="color_b">Video for [!exercise_name!]</span></header>
+    <article class="form_wrap">
+      <form action="{0}" enctype="multipart/form-data" method="post">
+        <table>
+          <tr class="hide">
+            <td class="label">data_id</td>
+            <td class="input"><input type="text" name="data_id" ng-model='data_id' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Upload Video</td>
+            <td class="input"><input type="file" name="video_file"/></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align:right">
+              <a href="/manage/exercise"><button type="button">Cancel</button></a>
+              <input type="submit" value="Add Exercise Video" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </article><!-- - /form_wrap - -->
+  </div><!-- - . main_wrap - --> 
