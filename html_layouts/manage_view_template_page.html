@@ -1,0 +1,98 @@
+<style type="text/css">
+    .main_wrap a { text-decoration: underline; }
+    .outter_wrap { width: 100%; overflow-x: scroll; }
+    .workout_plan { width: 1200px; table-layout: fixed; }
+    .workout_plan th { background:#37474F; color: #fff; padding: 5px; min-width: 100px; }
+    .workout_plan td { padding: 5px; min-width: 100px; }
+    .White, .Red, .Orange, .LightBlue, .LightGreen, .LightGrey, .BlueGrey { border: 1px solid grey; }
+    .White { background: #fff; }
+    .Red { background: #FFCDD2; }
+    .Orange { background: #FFE0B2;}
+    .LightBlue { background: #81D4FA; }
+    .LightGreen { background: #B2DFDB; }
+    .LightGrey { background: #E0E0E0; }
+    .BlueGrey { background: #B0BEC5; }
+    .red {  }
+    pre { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word; }
+    .hi { color: #fff; }
+    .list_wrap { }
+    .list_data { background-color: #fff; border: 1px solid #000; min-height: 135px; position: relative; border-radius: 2px; border-left: 1px solid red; }
+    .list_data:hover .pic_wrap { border: 1px solid #000; }
+    .color_wrap { width: 70px; height: 8px; border: 1px solid grey; position: absolute; right: 15px; top: 10px; }
+    .item_title { margin: 15px; padding-top: 10px; padding-left: 5px; margin-bottom: 5px; }
+    .item_title a { color: #111; }
+    .pic_wrap { width: 150px; margin: 10px; margin-left: 15px; display: inline-block; vertical-align: top; text-align: center; border: 1px solid #eee; border-radius: 5px; min-height: 125px; padding-top: 25px; margin-top: 5px; }
+    .set_wrap { display: inline-block; }
+    .print_options { background-color: #fff; padding: 10px; }
+    .table_button { display: inline-block; cursor: pointer; margin: 15px; }
+    .table_wrap { }
+    .show_table-yes { display: block; }
+    .show_table-no { display: none; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+     <header class="hi">Template [!item.template_name!]</header>
+      <a ng-href='/manage/template'><button>Back</button></a>
+      <a ng-href='/edit/template?[!item.data_id!]'><button>Edit Template</button></a>
+      <button ng-click="delete(item.data_id)">Remove</button>
+
+        <p>[!item.program_date!]&nbsp;&nbsp;[!item.muscles!]&nbsp;&nbsp;[!item.client_name!]</p>
+        <p>[!item.general_explanation!]</p>
+
+        <div class="outter_wrap">
+
+
+          <div class="list_wrap" ng-repeat="exercise in item.workout">
+            <div class="list_data">
+              <div class="color_wrap" ng-class="exercise.exercise_color"></div>
+              <div class="item_title">
+                <a href="/exercise_detail/?data_id=[!exercise.exercise_id!]" target="_blank">
+                [!exercise.name!]</a>
+              </div><!-- . item_title - -->
+              <a href="/exercise_detail/?data_id=[!exercise.exercise_id!]" target="_blank">
+              <div class="pic_wrap">
+                <img ng-src="/render_img?exercise?thumb?[!exercise.exercise_id!]">
+              </div><!-- . pic_wrap - --></a>
+              <div class="set_wrap">
+                <pre>Warm Up - [!exercise.warmup_set!]</pre>
+                <pre>Set 1 | [!exercise.set1!]</pre>
+                <pre>Set 2 | [!exercise.set2!]</pre>
+                <pre>Set 3 | [!exercise.set3!]</pre>
+                <span ng-show="table_length>=4"><pre>Set 4 | [!exercise.set4!]</pre></span>
+                <span ng-show="table_length>=5"><pre>Set 5 | [!exercise.set5!]</pre></span>
+              </div><!-- . set_wrap - -->
+            </div><!-- . list_data - -->
+          </div><!-- . list_wrap - -->
+
+          <div class="print_options">
+            <div class="table_button" ng-click="show_table='no'">Hide Table</div>
+            <div class="table_button" ng-click="show_table='yes'">Show Table</div>
+          </div><!-- . print_options -->
+          <div class="table_wrap show_table-[!show_table!]">
+            <table class="workout_plan">
+
+              <tr>
+                <th>Exercise</th>
+                <th>Warm up sets</th>
+                <th>Set 1</th>
+                <th>Set 2</th>
+                <th>Set 3</th>
+                <th ng-show="table_length>=4">Set 4</th>
+                <th ng-show="table_length>=5">Set 5</th>
+                <th>Image</th>
+              </tr>
+
+              <tr ng-repeat="exercise in item.workout" ng-class="exercise.exercise_color">
+                <td><a href="/exercise_detail/?data_id=[!exercise.exercise_id!]" target="_blank">[!exercise.name!]</a><br>[!exercise.notes!]</td>
+                <td><pre>[!exercise.warmup_set!]</pre></td>
+                <td><pre>[!exercise.set1!]</pre></td>
+                <td><pre>[!exercise.set2!]</pre></td>
+                <td><pre>[!exercise.set3!]</pre></td>
+                <td ng-show="table_length>=4"><pre>[!exercise.set4!]</pre></td>
+                <td ng-show="table_length>=5"><pre>[!exercise.set5!]</pre></td>
+                <td><img style="width:100px;" ng-src="/render_img?exercise?thumb?[!exercise.exercise_id!]"></td>
+              </tr><!-- . exercise_list -->
+            </table>
+          </div><!-- . table_wrap - -->
+        </div><!-- .outter_wrap -->
+
+  </div><!-- .main_wrap -->
