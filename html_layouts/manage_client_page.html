@@ -1,0 +1,87 @@
+ <style type="text/css">
+
+header { background:rgba(0,0,0, 0.6); color: #fff; }
+  .client_wrap { display: inline-block; margin: 10px; vertical-align: top; }
+    .client_data { border: 1px solid grey; text-align: left; padding: 10px; margin: 15px auto 0 auto; width: 350px;}
+    .img_wrap { width: 75px; height: 75px; margin: 0 auto; margin-bottom: 15px; }
+    .img_data { border: 1px solid #aaa; overflow: hidden; width: 75px; height: 75px; }
+    .text_wrap { color: #333; margin-top: 5px; margin-bottom: 10px; }
+    .text_wrap div { margin-bottom: 5px; font-size: 14px; letter-spacing: .08em; }
+    .text_wrap span { color: red; }
+    .text_wrap label { color: #888; text-align: right; width: 125px; display: inline-block; font-size: 12px; }
+    .client_option_buttons { text-align: center; border-top: 1px solid white; padding-top: 10px; margin-top: 15px; }
+    .item_data { display: inline-block; }
+
+.client_list_left { display: inline-block; width: 125px; outline: 1px solid #eee; min-height: 350px; }
+.client_list_right { width: 800px; outline: 1px solid #eee; display: inline-block; vertical-align: top; }
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+    <div class="page_button_wrap">
+      <a href='/publish/client'><button>Add A New Client</button></a>
+      <hr>
+      <div class="input-group">
+        
+        <p>
+          Sort by: 
+          <select  ng-model="sortBy" ng-init="sortBy = 'client_name' ">
+              <option value="client_name" ng-selected>Client Name(&#8593;)</option>
+              <option value="-client_name">Client Name(&#8595;)</option>
+              <option value="client_email">Client Email(&#8593;)</option>
+              <option value="-client_email">Client Email(&#8595;)</option>
+              <option value="add_time">Add Time(&#8593;)</option>
+              <option value="-add_time">Add Time(&#8595;)</option>
+          </select>
+          &nbsp;&nbsp;
+          <span>Seach:</span>
+        <input ng-model='select_client' type="text">
+        </p>
+      </div><!-- . input-group -->
+    </div><!-- . page_button_wrap - -->
+<div class="client_list_left">1
+  
+</div><!-- . client_list_left - -->
+<div class="client_list_right">
+    <div class="client_wrap"
+     ng-repeat="item in client_data  | orderBy: sortBy | filter: select_client ">
+      <div class="client_data">
+        <div class="img_wrap"><div class="img_data">
+          <img ng-src="[! item.has_photo?'/render_img?client?thumb?'+item.client_email : '' !]"></div></div><!-- . img_wrap -->
+        <div class="text_wrap">
+
+        <div class="client_name">
+            <label>Client Name</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_name !]</div>
+          </div><!-- . client_name - -->
+
+          <div class="client_email">
+            <label>Client Email</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_email !]</div>
+          </div><!-- . client_email - -->
+
+          <div class="client_program">
+            <label>Client Program</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.client_program !]</div>
+          </div><!-- . client_program - -->
+
+          <div class="program_status">
+            <label>Program Status</label> &nbsp; <span>|</span> &nbsp;
+            <div class="item_data">[! item.program_status !]</div>
+          </div><!-- . program_status - -->
+
+        </div><!-- . text_wrap-->
+
+        <div class="client_option_buttons">
+          <button ng-click="delete(item.client_email)" ng-disabled="btn_disable">Remove</button>
+          &nbsp; &nbsp;
+          <a ng-href='/edit/client?[!item.client_email!]'>
+            <button ng-disabled="btn_disable">Edit Info</button>
+          </a>
+          &nbsp; &nbsp;
+          <a ng-href='/view/client?[!item.client_email!]'>
+            <button ng-disabled="btn_disable">View</button>
+          </a>
+        </div><!-- . client_option_buttons - -->
+      </div><!-- . client_data -->
+    </div><!-- . client_wrap - -->
+    </div><!-- . client_list_right - -->
+  </div><!-- . main_wrap -->
