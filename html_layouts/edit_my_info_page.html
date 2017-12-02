@@ -1,0 +1,68 @@
+<style>
+body { background: rgba(0,0,0, 0.3); }
+
+header.hi { color: #000; }
+
+
+.my_info_wrap { max-width: 400px; margin: 0 auto; margin-top: 15px; padding-bottom: 75px; }
+.my_info_data { border: 1px solid #fff; border-radius: 3px; text-align: left; background: rgba(0,0,0, 0.6); color: #fff; padding: 15px; }
+
+.img_wrap { text-align: center; margin-top: 20px; margin-bottom: 15px; }
+.red { color: red; }
+
+table { border-spacing: 10px; }
+tr { height: 32px; }
+td.label { font-size: 14px; text-align: right; padding-right: 10px; border-right: 1px solid red; color: #999; }
+td.input { padding-left: 10px; }
+td img{ max-width: 70px; }
+input[type="text"] { width: 200px; height: 18px; }
+
+.edit_button_wrap { text-align: center; margin-bottom: 15px; margin-top: 30px; }
+
+  </style>
+  <div class="main_wrap-[!layout_style!]">
+   <header class="hi"><span class="color_b">Edit My Info</span></header>
+
+  <div class="my_info_wrap">
+    <div class="my_info_data">
+
+
+      <form action="/my_account/add_my_info" enctype="multipart/form-data" method="post">
+        <div class="img_wrap">
+          <img ng-src="[! item.has_photo?'/render_img?client?thumb?'+item.client_email : '' !]">
+        </div><!--.img_wrap-->
+        <table>
+          <tr class="hide">
+            <td class="label">Email</td>
+            <td class="input"><input type="text" name="client_email" ng-model='item.client_email' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Name</td>
+            <td class="input"><input type="text" name="client_name" ng-model='item.client_name' required/></td>
+          </tr>
+          <tr>
+            <td class="label">Phone</td>
+            <td class="input"><input type="text" name="client_phone" ng-model='item.client_phone'/></td>
+          </tr>
+          <tr>
+            <td class="label">Address</td>
+            <td class="input"><input type="text" name="client_address" ng-model='item.client_address'/></td>
+          </tr>
+          <tr>
+            <td class="label">Photo</td>
+            <td class="input"><input type="file" name="client_photo"/></td>
+          </tr>
+
+        </table>
+
+        <div class="edit_button_wrap">
+        <a href="/my_account/my_info"><button type="button">Cancel</button></a>
+              <input type="submit" value="Save" />
+      </div><!-- . edit_button_wrap - -->
+
+
+      </form>
+
+    </div><!--.my_info_data-->
+  </div><!-- . my_info_wrap - -->
+</div><!-- - .main_wrap - -->
