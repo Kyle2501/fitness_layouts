@@ -82,11 +82,16 @@ header { background: rgba(0,0,0, 0.6); color: #fff; }
 '''
 
 
-manage_videos_page_html = '''
+manage_videos_page_html = '''<style>
+body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }
+
+header { background: rgba(0,0,0, 0.6); color: #fff; }
+
+</style>
+  <div class="main_wrap-[!layout_style!]">
 
 
-Manage Videos
-
+  </div><!-- .main_wrap -->
 '''
 
 
@@ -1190,8 +1195,7 @@ edit_exercise_page_html = '''
 
 
 
-edit_template_page_html = '''
-  <style>
+edit_template_page_html = '''<style>
   .form_wrap, .small_form_wrap{width:90%;margin:auto; }
   .small_form_wrap { padding:0; border: 1px solid #ccc; }
   tr { height: 32px; overflow-x:auto; }
@@ -1211,7 +1215,7 @@ edit_template_page_html = '''
   pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word;}
   .button_wrap { border: 1px solid #bbb; border-radius: 3px; padding: 3px; font-size: 14px; width: 50px; margin: 5px; text-align: center; cursor: pointer; }
   .button_wrap:hover { border: 1px solid #555; }
-  </style>
+</style>
 
   <div class="main_wrap-[!layout_style!]">
    <header ng-show="!if_edit" class="hi"><span class="color_b">Add a New Template</span></header>
@@ -1227,8 +1231,6 @@ edit_template_page_html = '''
             <td class="label">Template Name</td>
             <td class="input"><input type="text" name="template_name" ng-model='item.template_name' required/></td>
           </tr>
-         
-
            <tr>
             <td class="label">Muscles</td>
             <td class="input"><input type="text" name="muscles" ng-model='item.muscles_array' required/></td>

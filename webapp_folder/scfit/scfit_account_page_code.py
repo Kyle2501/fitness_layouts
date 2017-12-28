@@ -22,9 +22,14 @@ body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; b
 
 header { background: rgba(0,0,0, 0.6); color: #fff; }
 
+.goto_wrap { background-color: #fff; padding: 10px; width: 175px; padding-right: 0; transition: 1s; }
+.goto_wrap a { background-color: #444; padding: 10px; color: #aaa; transition: 1s color; }
+.goto_wrap:hover { background-color: rgba(255,255,255,0.2); }
+.goto_wrap:hover a { color: #fff; border-right: 2px solid red; }
+
 </style>
   <div class="main_wrap-[!layout_style!]">
-
+    <div class="goto_wrap">Go To &nbsp; <a href="../../exercises">Exercise Library</a></div>
 
   </div><!-- .main_wrap -->
 '''
