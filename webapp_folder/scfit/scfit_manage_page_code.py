@@ -5,12 +5,12 @@
 admin_nav_html = '''
   <nav class="main_nav"><ul>
     <a href="../../"><li id="programsNav">&#8672; Public</li></a>
-    <a href="../../manage"><li id="manageNav">Manage Page</li></a>
+    <a href="../../manage"><li id="manage_pageNav">Manage Page</li></a>
     <a href="../../manage/videos"><li id="manage_videosNav">Manage Videos</li></a>
     <a href="../../manage/exercise"><li id="manage_exerciseNav">Manage Library</li></a>
-    <a href="../../manage/client"><li id="manage_clientNav">Manage Clients</li></a>
-    <a href="../../manage/waitlist"><li id="waitlistNav">Manage Waitlist</li></a>
-    <a href="../../manage/template"><li id="exerciseNav">Manage Templates</li></a>
+    <a href="../../manage/client"><li id="manage_clientsNav">Manage Clients</li></a>
+    <a href="../../manage/waitlist"><li id="manage_waitlistNav">Manage Waitlist</li></a>
+    <a href="../../manage/template"><li id="manage_templatesNav">Manage Templates</li></a>
     <a href="../../manage/pg_workout"><li id="manage_pg_workoutNav">P/G Workout</li></a>
     <a href="../../manage/sb_workout"><li id="manage_sb_workoutNav">S/B Workout</li></a>
     <a href="../../manage/testimonial"><li id="testimonialNav">Testimonial</li></a>
@@ -24,6 +24,11 @@ manage_page_html = '''<style>
 body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }
 
 header { background: rgba(0,0,0, 0.6); color: #fff; }
+
+.main_wrap-desktop { padding-bottom: 175px; max-width: 650px; }
+.option_wrap { background-color: rgba(0,0,0,0.4); }
+
+
 </style>
   <div class="main_wrap-[!layout_style!]">
     <div class="option_wrap">

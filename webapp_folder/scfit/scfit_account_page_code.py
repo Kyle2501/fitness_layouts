@@ -6,16 +6,28 @@
 account_nav_html = '''
   <nav class="main_nav">
     <ul>
-      <a href="../../my_account/"><li id="my_accountNav">My Account</li></a>
       <a href="../../my_account/my_info"><li id="my_infoNav">My Info</li></a>
-      <a href="../../my_account/my_workout"><li id="my_workoutNav">My Workout</li></a>
+      <a href="../../my_account/"><li id="my_accountNav">My Account</li></a>
       <a href="../../my_account/my_program"><li id="my_programNav">My Program</li></a>
       <a href="../../my_account/my_testimonial"><li id="my_testimonialNav">My Results</li></a>
+      <a href="../../my_account/my_workout"><li id="my_workoutNav">My Workout</li></a>
+      <a href="../../my_account/my_library"><li id="my_libraryNav">My Library</li></a>
     </ul>
   </nav><!-- - /main_nav - -->
 '''
 
 
+my_library_page_code = '''<style>
+body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }
+
+header { background: rgba(0,0,0, 0.6); color: #fff; }
+
+</style>
+  <div class="main_wrap-[!layout_style!]">
+
+
+  </div><!-- .main_wrap -->
+'''
 
 my_account_page_code = '''<style>
 body { background: url("../../pics/e_bg_c.jpg") no-repeat center center fixed; background-size: cover; }

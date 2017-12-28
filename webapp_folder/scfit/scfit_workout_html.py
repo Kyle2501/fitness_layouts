@@ -256,7 +256,7 @@ exercise_detail_page_html = '''<style>
 .player_wrap { outline: 1px dashed #ddd; }
 
 .video_wrap-mobile { background-color: #444; margin: 0 auto; position: fixed; left: 0; top: 55px; right: 0; height: 275px; }
-.video_wrap-desktop { display: inline-block; width: 350px; height: 250px; margin-left: 200px; outline: 1px solid red; display: inline-block; position: relative; }
+.video_wrap-desktop { display: inline-block; width: 350px; height: 250px; margin-left: 75px; outline: 1px solid #eee; display: inline-block; position: relative; vertical-align: top; }
 .video_data { background-color: #333; padding-bottom: 20px; }
 
     

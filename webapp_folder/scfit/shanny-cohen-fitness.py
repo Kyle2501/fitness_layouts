@@ -1922,6 +1922,7 @@ class publicSite(webapp2.RequestHandler):
         nav_html = public_html.public_nav_html
         page_html = page_header + public_html.main_page_html
         html_file = 'publicSite.html'
+        nav_select = ''
         
         program_chosen = ''
         data_id = ''
@@ -1940,6 +1941,7 @@ class publicSite(webapp2.RequestHandler):
             # page_html = page_header + public_html.sport_specific_snowboarding_page_code
             page_html = ''
             html_file = 'fitness_classes.html'
+            nav_select = ''
 
 
         if path_layer == 'sport_specific':
@@ -1949,6 +1951,7 @@ class publicSite(webapp2.RequestHandler):
             # page_html = page_header + public_html.sport_specific_snowboarding_page_code
             page_html = ''
             html_file = 'fitness_classes.html'
+            nav_select = ''
 
             if base == 'motocross':
                 sub_select = 'motocross'
@@ -1982,11 +1985,13 @@ class publicSite(webapp2.RequestHandler):
             page_id = 'free_weekly'
             page_name = 'Free Weekly'
             page_html = page_header + public_html.free_weekly_page_html
+            nav_select = ''
         
         if path_layer == 'bikini_bootcamp':
             page_id = 'bikini_bootcamp'
             page_name = 'Bikini Bootcamp'
             page_html = page_header + public_html.bikini_bootcamp_page_html
+            nav_select = ''
         
 
 # // - Programs Page
@@ -1995,11 +2000,13 @@ class publicSite(webapp2.RequestHandler):
             page_id = 'programs'
             page_name = 'Programs'
             page_html = page_header + public_html.programs_page_html
+            nav_select = ''
 
         if path_layer == 'programs':
             page_id = 'programs'
             page_name = 'Programs'
             page_html = page_header + public_html.programs_page_html
+            nav_select = ''
 
         if path_layer == 'results':
             page_id = 'results'
@@ -2007,6 +2014,7 @@ class publicSite(webapp2.RequestHandler):
             # page_html = page_header + public_html.results_page_html
             page_html = ''
             html_file = 'fitness_results.html'
+            nav_select = ''
             
         if path_layer == 'trainers':
             page_id = 'training'
@@ -2014,6 +2022,7 @@ class publicSite(webapp2.RequestHandler):
             # page_html = page_header + public_html.results_page_html
             page_html = ''
             html_file = 'fitness_training.html'
+            nav_select = ''
         
         if path_layer == 'training':
             page_id = 'training'
@@ -2021,17 +2030,20 @@ class publicSite(webapp2.RequestHandler):
             # page_html = page_header + public_html.results_page_html
             page_html = ''
             html_file = 'fitness_training.html'
+            nav_select = ''
 
         if path_layer == 'exercises':
             page_id = 'exercises'
             page_name = 'Exercises'
             page_html = page_header + workout_html.exercises_page_html
+            nav_select = ''
 
         if path_layer == 'exercise_detail':
             page_id = 'exercise_detail'
             page_name = 'Exercises'
             page_html = page_header + workout_html.exercise_detail_page_html
             data_id = self.request.get("data_id")
+            nav_select = ''
 
         if path_layer == 'about':
             page_id = 'about'
@@ -2039,6 +2051,7 @@ class publicSite(webapp2.RequestHandler):
             # page_html = page_header + public_html.about_page_html
             page_html = ''
             html_file = 'about_page.html'
+            nav_select = ''
 
 
 # // - Contact Page
@@ -2047,11 +2060,13 @@ class publicSite(webapp2.RequestHandler):
             page_id = 'contact'
             page_name = 'Contact'
             page_html = page_header + public_html.contact_page_html
+            nav_select = ''
 
         if path_layer == 'contact_success':
             page_id = 'contact_success'
             page_name = 'Contact Success'
             page_html = page_header + public_html.contact_success_page_html
+            nav_select = ''
 
 
 # // - Join Pages
@@ -2060,28 +2075,33 @@ class publicSite(webapp2.RequestHandler):
             page_id = 'programs'
             page_name = 'Promo Join'
             page_html = page_header + html.promo_join_page_code
+            nav_select = ''
 
         if path_layer == 'confirm_signup':
             page_id = 'confirm_signup'
             page_name = 'Confirm Signup'
             page_html = page_header + account_html.confirm_signup_page_html
             program_chosen = self.request.get('program_chosen')
+            nav_select = ''
 
         if path_layer == 'payment_success':
             page_id = 'payment_success'
             page_name = 'Payment Success'
             page_html = page_header + account_html.payment_success_page_html
+            nav_select = ''
 
         if path_layer == 'cancel_program_success':
             page_id = 'cancel_program_success'
             page_name = 'Cancel Program Success'
             page_html = page_header + account_html.cancel_program_success_page_html
+            nav_select = ''
 
 
         if path_layer == 'cam_test':
             page_id = 'cam_test'
             page_name = 'Cam Test'
             page_html = page_header + html.cam_test_page_code
+            nav_select = ''
 
   # - manage, edit, publish pages for public 
         if path_layer == 'manage' or path_layer == 'edit' or path_layer == 'publish':
@@ -2089,12 +2109,14 @@ class publicSite(webapp2.RequestHandler):
             page_name = 'Log in'
             page_html = manage_html.manage_page_html
             page_class = 'manage'
+            nav_select = ''
 
   # - some other pages for public 
         if path_layer == 'payment' or path_layer == 'add2waitlist' or path_layer == 'my_account' :
           page_id = 'login_page'
           page_name = 'Log in'
           page_html = page_header + login_page_html
+          nav_select = ''
 
         if user:
           if path_layer == 'payment':
@@ -2102,12 +2124,14 @@ class publicSite(webapp2.RequestHandler):
               page_name = 'Payment'
               page_html = page_header + account_html.payment_page_html
               program_chosen = self.request.get('program_chosen')
+              nav_select = 'my_program'
 
           if path_layer == 'add2waitlist':
               page_id = 'add2waitlist'
               page_name = 'Add to Waitlist'
               page_html = page_header + account_html.add2waitlist_page_html
               program_chosen = self.request.get('program_chosen')
+              nav_select = 'my_program'
 
           if path_layer == 'my_account':
             if base == 'my_account' or base == '':
@@ -2115,6 +2139,7 @@ class publicSite(webapp2.RequestHandler):
               page_name = 'My Account'
               page_html = page_header + account_html.my_account_page_code
               nav_html = account_html.account_nav_html
+              nav_select = 'my_account'
 
 
             if base == 'my_workout':
@@ -2122,6 +2147,7 @@ class publicSite(webapp2.RequestHandler):
               page_name = 'My Workout'
               page_html = page_header + account_html.my_workout
               nav_html = account_html.account_nav_html
+              nav_select = 'my_workout'
 
             if base.startswith('view_workout'):
               page_id = 'view_my_workout'
@@ -2129,54 +2155,70 @@ class publicSite(webapp2.RequestHandler):
               page_html = account_html.view_my_workout
               data_id = base.split('?')[1]
               nav_html = account_html.account_nav_html
+              nav_select = 'my_workout'
+
+            if base == 'my_library':
+              page_id = 'my_library'
+              page_name = 'My Library'
+              page_html = page_header + account_html.my_library_page_code
+              nav_html = account_html.account_nav_html
+              nav_select = 'my_library'
 
             if base == 'my_program':
               page_id = 'my_program'
               page_name = 'My Program'
               page_html = page_header + account_html.my_program_page_code
               nav_html = account_html.account_nav_html
+              nav_select = 'my_program'
 
             if base == 'change_credit_card':
               page_id = 'change_credit_card'
               page_name = 'Change Credit Card'
               page_html = page_header + account_html.change_credit_card_page_html
               nav_html = account_html.account_nav_html
+              nav_select = 'my_program'
 
             if base == 'change_credit_card_success':
               page_id = 'change_credit_card_success'
               page_name = 'Change Credit Card Success'
               page_html = page_header + change_credit_card_success_page_html
               nav_html = account_html.account_nav_html
+              nav_select = 'my_program'
 
             if base == 'change_program_success':
               page_id = 'change_program_success'
               page_name = 'Change Program Success'
               page_html = page_header + change_program_success_page_html
               nav_html = account_html.account_nav_html
+              nav_select = 'my_program'
 
             if base == 'my_info':
               page_id = 'my_info'
               page_name = 'My Info'
               page_html = page_header + account_html.my_info_page_code
               nav_html = account_html.account_nav_html
+              nav_select = 'my_info'
 
             if base == 'edit_my_info':
               page_id = 'edit_my_info'
               page_name = 'Edit My Info'
               page_html = page_header + account_html.edit_my_info_page_code
               nav_html = account_html.account_nav_html
+              nav_select = 'my_info'
 
             if base == 'my_testimonial':
               page_id = 'my_testimonial'
               page_name = 'My Testimonial'
               page_html = page_header + account_html.my_testimonial_page_code
               nav_html = account_html.account_nav_html
+              nav_select = 'my_testimonial'
 
             if base == 'publish_my_testimonial':
               page_id = 'publish_my_testimonial'
               page_name = 'Publish My Testimonial'
               page_html = page_header + account_html.edit_my_testimonial_page_code
               nav_html = account_html.account_nav_html
+              nav_select = 'my_testimonial'
 
             if base.startswith('edit_my_testimonial'):
               page_id = 'edit_my_testimonial'
@@ -2184,6 +2226,7 @@ class publicSite(webapp2.RequestHandler):
               page_html = page_header + account_html.edit_my_testimonial_page_code
               nav_html = account_html.account_nav_html
               data_id = base.split('?')[1]
+              nav_select = 'my_testimonial'
 
 
 
@@ -2199,30 +2242,35 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Manage'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_page_html
+                nav_select = 'manage_page'
               
               if base == 'bikini_bootcamp':
                 page_id = 'manage_bikini_bootcamp'
                 page_name = 'Manage Bikini Bootcamp'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_bikini_bootcamp_page_html
+                nav_select = 'manage_videos'
               
               if base == 'free_weekly':
                 page_id = 'manage_free_weekly'
                 page_name = 'Manage Free Weekly'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_free_weekly_page_html
+                nav_select = 'manage_videos'
               
               if base == 'weekly_video':
                 page_id = 'manage_weekly_video'
                 page_name = 'Manage Weekly Video'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_weekly_video_page_html
+                nav_select = 'manage_videos'
               
               if base == 'homepage_video':
                 page_id = 'manage_homepage_video'
                 page_name = 'Manage Homepage Video'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_homepage_video_page_html
+                nav_select = 'manage_videos'
 
 
 
@@ -2231,36 +2279,42 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Manage Exercise'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_exercise_page_html
+                nav_select = ''
 
               if base == 'client':
                 page_id = 'manage_client'
                 page_name = 'Manage Client'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_client_page_html
+                nav_select = 'manage_clients'
 
               if base == 'waitlist':
                 page_id = 'manage_waitlist'
                 page_name = 'Manage Waitlist'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_waitlist_page_html
+                nav_select = 'manage_waitlist'
 
               if base == 'testimonial':
                 page_id = 'manage_testimonial'
                 page_name = 'Manage Testimonial'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_testimonial_page_html
+                nav_select = 'testimonial'
 
               if base == 'pg_workout':
                 page_id = 'manage_pg_workout'
                 page_name = 'Mange Workout'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_workout_page_html
+                nav_select = 'manage_pg_workout'
 
               if base == 'sb_workout':
                 page_id = 'manage_sb_workout'
                 page_name = 'Mange Workout'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_workout_page_html
+                nav_select = 'manage_sb_workout'
 
               if base.startswith('view_pg_workout'):
                 page_id = 'manage_view_pg_workout'
@@ -2268,6 +2322,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_view_workout_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base.startswith('view_sb_workout'):
                 page_id = 'manage_view_sb_workout'
@@ -2275,12 +2330,14 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_view_workout_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base == 'template':
                 page_id = 'manage_template'
                 page_name = 'Mange Template'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_template_page_html
+                nav_select = 'manage_templates'
 
               if base.startswith('view_template'):
                 page_id = 'manage_view_template'
@@ -2288,6 +2345,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_view_template_page_html
                 data_id = base.split('?')[1]
+                nav_select = 'manage_templates'
 
           if path_layer == 'view':
               if base.startswith('client'):
@@ -2296,6 +2354,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.view_client_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
 
 # // Edit Admin --
@@ -2306,6 +2365,7 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Edit'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.manage_page_html
+                nav_select = ''
               
               
               if base.startswith('bikini_bootcamp'):
@@ -2314,6 +2374,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_bikini_bootcamp_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
               
               if base.startswith('free_weekly'):
                 page_id = 'edit_free_weekly'
@@ -2321,6 +2382,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_free_weekly_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
               
               if base.startswith('weekly_video'):
                 page_id = 'edit_weekly_video'
@@ -2328,6 +2390,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_weekly_video_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
               
               if base.startswith('homepage_video'):
                 page_id = 'edit_homepage_video'
@@ -2335,6 +2398,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_homepage_video_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
 
 
@@ -2344,6 +2408,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_exercise_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base.startswith('client'):
                 page_id = 'edit_client'
@@ -2351,6 +2416,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_client_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base.startswith('waitlist'):
                 page_id = 'edit_waitlist'
@@ -2358,6 +2424,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = edit_waitlist_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base.startswith('testimonial'):
                 page_id = 'edit_testimonial'
@@ -2365,6 +2432,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_testimonial_page_html
                 data_id = base.split('?')[1]
+                nav_select = 'testimonial'
 
               if base.startswith('pg_workout'):
                 page_id = 'edit_pg_workout'
@@ -2372,6 +2440,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = edit_workout_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base.startswith('sb_workout'):
                 page_id = 'edit_sb_workout'
@@ -2379,6 +2448,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = edit_workout_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
 
               if base.startswith('template'):
                 page_id = 'edit_template'
@@ -2386,6 +2456,7 @@ class publicSite(webapp2.RequestHandler):
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_template_page_html
                 data_id = base.split('?')[1]
+                nav_select = ''
               
 # // Publish Admin --
 
@@ -2400,6 +2471,7 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Homepage Video'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_homepage_video_page_html
+                nav_select = ''
 
               if base.startswith('homepage_video_upload'):
                 page_id = 'homepage_video_upload'
@@ -2408,6 +2480,7 @@ class publicSite(webapp2.RequestHandler):
                 upload_url = blobstore.create_upload_url('/upload_homepage_video')
                 page_html = manage_html.upload_homepage_video_page_html.format(upload_url)
                 data_id = base.split('?')[1]
+                nav_select = ''
       
       
           
@@ -2418,6 +2491,7 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Weekly Video'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_weekly_video_page_html
+                nav_select = ''
 
               if base.startswith('weekly_video_upload'):
                 page_id = 'weekly_video_upload'
@@ -2426,6 +2500,7 @@ class publicSite(webapp2.RequestHandler):
                 upload_url = blobstore.create_upload_url('/upload_weekly_video')
                 page_html = manage_html.upload_weekly_video_page_html.format(upload_url)
                 data_id = base.split('?')[1]
+                nav_select = ''
                 
                 
               if base.startswith('free_weekly'):
@@ -2433,6 +2508,7 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Free Weekly'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_free_weekly_page_html
+                nav_select = ''
 
               if base.startswith('free_weekly_upload'):
                 page_id = 'free_weekly_upload'
@@ -2441,6 +2517,7 @@ class publicSite(webapp2.RequestHandler):
                 upload_url = blobstore.create_upload_url('/upload_free_weekly')
                 page_html = manage_html.upload_free_weekly_page_html.format(upload_url)
                 data_id = base.split('?')[1]
+                nav_select = ''
                 
                 
                 
@@ -2451,6 +2528,7 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Bikini Bootcamp'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_bikini_bootcamp_page_html
+                nav_select = ''
 
               if base.startswith('bikini_bootcamp_upload'):
                 page_id = 'bikini_bootcamp_upload'
@@ -2459,6 +2537,7 @@ class publicSite(webapp2.RequestHandler):
                 upload_url = blobstore.create_upload_url('/upload_bikini_bootcamp')
                 page_html = manage_html.upload_bikini_bootcamp_page_html.format(upload_url)
                 data_id = base.split('?')[1]
+                nav_select = ''
             
             
 # // Exersise Libary Video --
@@ -2468,6 +2547,7 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Exercise'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_exercise_page_html
+                nav_select = ''
 
               if base.startswith('exercise_video'):
                 page_id = 'publish_exercise_video'
@@ -2476,6 +2556,7 @@ class publicSite(webapp2.RequestHandler):
                 upload_url = blobstore.create_upload_url('/upload_exercise_video')
                 page_html = manage_html.publish_exercise_video_page_html.format(upload_url)
                 data_id = base.split('?')[1]
+                nav_select = ''
             
             
           
@@ -2486,18 +2567,21 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Client'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.publish_client_page_html
+                nav_select = ''
 
               if base == 'waitlist':
                 page_id = 'publish_waitlist'
                 page_name = 'Publish Waitlist'
                 nav_html = manage_html.admin_nav_html
                 page_html = publish_waitlist_page_html
+                nav_select = ''
 
               if base == 'testimonial':
                 page_id = 'publish_testimonial'
                 page_name = 'Publish Testimonial'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_testimonial_page_html
+                nav_select = 'testimonial'
 
 # // Workouts --
 
@@ -2506,18 +2590,21 @@ class publicSite(webapp2.RequestHandler):
                 page_name = 'Publish Workout Plan'
                 nav_html = manage_html.admin_nav_html
                 page_html = edit_workout_page_html
+                nav_select = ''
 
               if base == 'sb_workout':
                 page_id = 'publish_sb_workout'
                 page_name = 'Publish Workout Plan'
                 nav_html = manage_html.admin_nav_html
                 page_html = edit_workout_page_html
+                nav_select = ''
 
               if base == 'template':
                 page_id = 'publish_template'
                 page_name = 'Publish Template'
                 nav_html = manage_html.admin_nav_html
                 page_html = manage_html.edit_template_page_html
+                nav_select = 'manage_templates'
 
       # - template
         objects = {
@@ -2533,6 +2620,7 @@ class publicSite(webapp2.RequestHandler):
             'page_name': page_name,
             'page_id': page_id,
             'nav_html': nav_html,
+            'nav_select': nav_select,
             'sub_select': sub_select,
             'page_html': page_html,
             'data_id': data_id,
@@ -2777,6 +2865,7 @@ app = webapp2.WSGIApplication([    # - Pages
     ('/my_account/my_info/?', publicSite),
     ('/my_account/my_testimonial/?', publicSite),
     ('/my_account/my_workout/?', publicSite),
+    ('/my_account/my_library/?', publicSite),
     ('/my_account/view_workout/?', publicSite),
     ('/my_account/edit_my_info/?', publicSite),
     ('/my_account/add_my_info/?', addClient_db_user),
