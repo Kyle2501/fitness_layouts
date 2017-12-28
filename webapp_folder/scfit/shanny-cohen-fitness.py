@@ -2025,7 +2025,7 @@ class publicSite(webapp2.RequestHandler):
         if path_layer == 'exercises':
             page_id = 'exercises'
             page_name = 'Exercises'
-            page_html = page_header + public_html.exercises_page_html
+            page_html = page_header + workout_html.exercises_page_html
 
         if path_layer == 'exercise_detail':
             page_id = 'exercise_detail'

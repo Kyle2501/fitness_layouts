@@ -42,7 +42,9 @@ exercises_page_html = '''
     
     .save { color: #ddd; }
 
-    .button_wrap { display: inline-block; margin: 10px; border: 1px solid #aaa; border-radius: 3px; padding: 5px; width: 85px; text-align: center; cursor: pointer; font-size: 12px; font-family: 'Lato', sans-serif; background-color: white; }
+.select_all_wrap { outline: 1px dotted red; margin-top: 15px; padding: 5px; }
+
+    .button_wrap { display: inline-block; margin: 10px; border: 1px solid #aaa; border-radius: 3px; padding: 5px; width: 45px; text-align: center; cursor: pointer; font-size: 12px; font-family: 'Lato', sans-serif; background-color: white; }
     .button_wrap:hover { border: 1px solid #444; }
 
     .search_welcome { background-color: rgba(255,255,255,0.9); padding: 15px; color: #000; }
@@ -72,6 +74,8 @@ exercises_page_html = '''
     
     .text_wrap ul { margin: 0; }
 
+
+
     @media screen and (max-width: 650px){
       #exercise_wrap { width: 100%; margin: auto; }
       .select_category_wrap { display: block; width: 90%; font-size: 13px; text-align: right; }
@@ -92,16 +96,14 @@ exercises_page_html = '''
   <div id="exercise_wrap">
 
      <div class="select_category_wrap">
-
-
-     <div class="button_wrap"><label>
-      <input type="checkbox" name="deselect_all" value="deselect_all" ng-click="deselect_all_muscles()" class="hide"> Deselect<br>        
-     </label></div>
-
-
-     <div class="button_wrap"><label>
-        <input type="checkbox" name="select_all" value="all" ng-click="select_all_muscles()" class="hide"> Select All<br>
-      </label></div>
+       <div>Exercises: _</div>
+       <div class="select_all_wrap">Select<br />
+         <div class="button_wrap"><label>
+          <input type="checkbox" name="deselect_all" value="deselect_all" ng-click="deselect_all_muscles()" class="hide">None<br></label></div>
+         <div class="button_wrap"><label>
+          <input type="checkbox" name="select_all" value="all" ng-click="select_all_muscles()"
+            class="hide">All<br></label></div>
+       </div><!-- . select_all_wrap - -->
 
     
       <div class="show_more" ng-init="more_fliters='yes'">
