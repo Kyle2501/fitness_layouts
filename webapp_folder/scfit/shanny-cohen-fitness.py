@@ -2030,7 +2030,7 @@ class publicSite(webapp2.RequestHandler):
         if path_layer == 'exercise_detail':
             page_id = 'exercise_detail'
             page_name = 'Exercises'
-            page_html = page_header + public_html.exercise_detail_page_html
+            page_html = page_header + workout_html.exercise_detail_page_html
             data_id = self.request.get("data_id")
 
         if path_layer == 'about':

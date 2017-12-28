@@ -64,11 +64,11 @@ exercises_page_html = '''
     .muscle_targeted_filter .button_wrap { width: 50px; margin: 5px; }
 
     input[type="checkbox"]{ display: none; }
-    span.checkbox { padding-left: 10px; border-left: 3px solid rgba(255,255,255,0.0); color: #999; margin-left: 5px; }
-    span.checkbox:hover { border-left: 3px solid red; }
-    input[type="checkbox"]:checked + span.checkbox { border-left: 3px solid red; color: #111; }
+    span.checkbox { padding-right: 10px; border-right: 3px solid rgba(255,255,255,0.0); color: #999; margin-right: 5px; }
+    span.checkbox:hover { border-right: 3px solid red; }
+    input[type="checkbox"]:checked + span.checkbox { border-right: 3px solid red; color: #111; }
 
-    .side_list_wrap label { display: block; margin-bottom: 7px; cursor: pointer; }
+    .side_list_wrap label { display: block; margin-bottom: 7px; cursor: pointer; text-align: right; }
 
     .main_wrap-desktop { padding-top: 0; margin-left: 155px; }
     
@@ -251,96 +251,103 @@ exercises_page_html = '''
 
 
 
-exercise_detail_page_html = '''
-  <style>
- 
-    .detail_wrap-mobile { position: absolute; left: 0; right: 0; bottom: 85px; top: 275px; }
-    .detail_wrap-desktop { margin: 15px; width: 800px; margin-left: 100px; }
-    .detail_data { font-family: 'Lato', sans-serif; font-weight: 300; background-color: #000; }
+exercise_detail_page_html = '''<style>
 
-    .img_wrap { text-align: center; }
-    .img_wrap img { width: 100%; }
+.player_wrap { outline: 1px dashed #ddd; }
 
-    .text_wrap { display: inline-block; vertical-align: top; }
-    .detail_wrap-mobile .text_wrap {  }
-    .detail_wrap-desktop .text_wrap { font-size: 16px; margin: 25px; }
+.video_wrap-mobile { background-color: #444; margin: 0 auto; position: fixed; left: 0; top: 55px; right: 0; height: 275px; }
+.video_wrap-desktop { display: inline-block; width: 350px; height: 250px; margin-left: 200px; outline: 1px solid red; display: inline-block; position: relative; }
+.video_data { background-color: #333; padding-bottom: 20px; }
 
-    .text_wrap p { line-height: 12px; }
-
-    .video_wrap-mobile { background-color: #444; margin: 0 auto; position: fixed; left: 0; top: 55px; right: 0; height: 275px; }
-    .video_wrap-desktop { display: inline-block; width: 350px; height: 250px; margin-left: 200px; }
-    .video_data { background-color: #333; padding-bottom: 20px; }
-
-    #video_controls { position: absolute; right: 15px; }
-    .video_controls:hover { opacity: 1; }
-    #volume-bar { width: 50px; }
-    .red_title { color: red; font-size: 18px; line-height: 34px; }
-    .red { color: red; }
-    .video_error { font-size: 12px; font-family: monospace; text-align: center; padding-top: 25px; color: #999; }
-    .back_button a { font-size: 14px; color: #aaa; }
-    .back_button a:hover { font-size: 14px; color: #333; }
-
-    .detail_title { color: #fff; font-size: 24px; text-align: left; font-weight: bold; padding-bottom: 25px; margin-bottom: 15px; border-top: 1px solid #eee; }
-
-    .text_wrap { color: #000; margin-top: 5px; margin-bottom: 10px; }
-    .text_wrap div { margin-bottom: 5px; font-size: 14px; letter-spacing: .08em; }
-    .text_wrap span { color: red; }
-    .text_wrap label { color: #888; text-align: right; width: 125px; display: inline-block; font-size: 12px; }
-
-    .item_data { display: inline-block; color: steelblue; }
     
-    .back_button { position: fixed; left: 5px; bottom: 12px; z-index: 1000; }
-    
-    .progress_bar { display: inline-block; text-align: center; margin-right: 15px; }
-    .progress_bar input { width: 100%; }
-    
-    .difficulty_level { position: fixed; bottom: 12px; left: 50px; z-index: 1000; }
-    
-    .volume_controls {  }
+.detail_wrap-mobile { position: absolute; left: 0; right: 0; bottom: 85px; top: 275px; }
+.detail_wrap-desktop { margin: 15px; height: 250px; width: 300px; display: inline-block; outline: 1px dashed #eee; position: relative; }
+.detail_data { font-family: 'Lato', sans-serif; font-weight: 300; background-color: #000; width: 100%; position: relative; padding-bottom: 15px;  }
+
+.img_wrap { text-align: center; }
+.img_data img { width: 100%; }
+
+.text_wrap { display: inline-block; vertical-align: top; }
+.detail_wrap-mobile .text_wrap {  }
+.detail_wrap-desktop .text_wrap { font-size: 16px; margin: 25px; }
+
+.text_wrap p { line-height: 12px; }
+
+
+
+#video_controls { position: absolute; right: 15px; }
+.video_controls:hover { opacity: 1; }
+#volume-bar { width: 50px; }
+.red_title { color: red; font-size: 18px; line-height: 34px; }
+.red { color: red; }
+.video_error { font-size: 12px; font-family: monospace; text-align: center; padding-top: 25px; color: #999; }
+.back_button a { font-size: 14px; color: #aaa; }
+.back_button a:hover { font-size: 14px; color: #333; }
+
+.detail_title { color: #fff; font-size: 24px; text-align: left; font-weight: bold; padding-bottom: 25px; margin-bottom: 15px; border-top: 1px solid #eee; padding: 15px; }
+
+.text_wrap { color: #000; margin-top: 5px; margin-bottom: 10px; width: 100%; }
+.text_wrap div { margin-bottom: 5px; font-size: 14px; letter-spacing: .08em; }
+.text_wrap span { color: red; }
+.text_wrap label { color: #888; text-align: right; width: 125px; display: inline-block; font-size: 12px; }
+
+.item_data { display: inline-block; color: steelblue; }
+
+.back_button { position: fixed; left: 5px; bottom: 12px; z-index: 1000; }
+
+.progress_bar { display: inline-block; text-align: center; margin-right: 15px; }
+.progress_bar input {  }
+
+.difficulty_level { position: fixed; bottom: 12px; left: 50px; z-index: 1000; }
+
+.volume_controls {  }
+
+.main_data { padding-bottom: 125px; }
 
 .control_buttons { background-color: #fff; }
 
-    @media screen and (max-width: 800px){
-      #volume-bar { width: 25px; }
-    }
+@media screen and (min-width: 800px){
+    #volume-bar { width: 25px; }
+    .back_button { left: auto; position: absolute; right: 10px; bottom: 5px; }
+    .img_data { width: 450px; }
+    .difficulty_level { position: absolute; right: 15px; top: 15px; left: auto; }
+    .control_buttons { height: 250px; position: relative; outline: 1px solid #eee; }
+    #video_controls { position: relative; bottom: 0; top: 0; }
+    #play-pause { position: absolute; right: 25px; top: 25px; }
+    #seek-bar { position: absolute; left: 25px; top: 175px; right: 15px; }
+    #full-screen { position: absolute; left: 5px; bottom: 5px; }
+}
 
 
   </style>
   <div class="main_wrap-[!layout_style!]">
-
-
-    <section class="video_wrap-[!layout_style!]">
-      <div class="video_error" ng-show='!item.exercise_video_key'>No Video</div>
-
-      <div class="video_data" ng-show='item.exercise_video_key'>
-        <video id="video" width="100%" height="200" ng-src="[!video_url!]"></video>
+  <div class="main_data">
+    <div class="player_wrap">
+      <section class="video_wrap-[!layout_style!]">
+        <div class="video_error" ng-show='!item.exercise_video_key'>No Video</div>
+        <div class="video_data" ng-show='item.exercise_video_key'>
+          <video id="video" width="100%" height="200" ng-src="[!video_url!]"></video>
         
-      </div><!-- . video_data -->
-    </section><!-- . video_wrap -->
+        </div><!-- . video_data -->
+      </section><!-- . video_wrap -->
 
     <div class="detail_wrap-[!layout_style!]">
-      <div class="detail_data">
-<div class="control_buttons">
-        <div id="video_controls">
-          <div class="progress_bar"><input type="range" id="seek-bar" value="0"></div>
-          <button type="button" id="play-pause">Play<i class="fa fa-play"></i></button>
-          
-        </div><!-- . video_controls -->
-        
-        
+        <div class="control_buttons">
+          <div id="video_controls">
+            <div class="progress_bar"><input type="range" id="seek-bar" value="0"></div>
+            <button type="button" id="play-pause">Play<i class="fa fa-play"></i></button>
+          </div><!-- . video_controls -->
          <div class="volume_controls">
- <button type="button" id="full-screen">Full Screen<i class="fa fa-expand"></i></button>
-  <!-- <button type="button" id="mute">Mute<i class='fa fa-volume-off'></i></button>
-   <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1"> -->
- </div>
-        
+           <button type="button" id="full-screen">Full Screen<i class="fa fa-expand"></i></button>
+      <!-- <button type="button" id="mute">Mute<i class='fa fa-volume-off'></i></button>
+           <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1"> -->
+         </div><!-- . volume_controls - -->
+         </div><!-- . video_controls - -->
       </div><!-- . control_buttons - -->
-
-        <section class="text_wrap">
-        
-         <div class="detail_title">[! item.exercise_name !]</div>
-
-        
+    </div><!-- . player_wrap - -->
+    <section class="text_wrap">
+    <div class="detail_data">
+      <div class="detail_title">[! item.exercise_name !]</div>
           <div class="muscle_targeted">
             <label>Muscle Targeted</label> &nbsp; <span>|</span> &nbsp;
             <div class="item_data">[! item.muscle_targeted !]</div>
@@ -353,14 +360,16 @@ exercise_detail_page_html = '''
             <label>Difficulty Level</label> &nbsp; <span>|</span> &nbsp;
             <div class="item_data">[! item.difficulty_level !]</div>
           </div><!-- . difficulty_level - -->
-
+          <div class="back_button"><a href="../../exercises"><button>List</button></a></div>
         </section><!-- . text_wrap -->
 
-        <section class="img_wrap"><img ng-src="[!img_url!]"></section>
+        <section class="img_wrap">
+          <div class="img_data"><img ng-src="[!img_url!]"></div>
+        </section><!-- . img_wrap - -->
 
       </div><!-- . detail_data -->
     </div><!-- . detail_wrap - -->
-<div class="back_button"><a href="../../exercises"><button>Back</button></a></div>
-  </div><!-- .main_wrap -->
+    </div><!-- . main_data - -->
+  </div><!-- . main_wrap -->
 '''
 
