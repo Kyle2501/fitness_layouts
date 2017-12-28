@@ -2036,14 +2036,14 @@ class publicSite(webapp2.RequestHandler):
             page_id = 'exercises'
             page_name = 'Exercises'
             page_html = page_header + workout_html.exercises_page_html
-            nav_select = ''
+            nav_select = 'exercises'
 
         if path_layer == 'exercise_detail':
             page_id = 'exercise_detail'
             page_name = 'Exercises'
             page_html = page_header + workout_html.exercise_detail_page_html
             data_id = self.request.get("data_id")
-            nav_select = ''
+            nav_select = 'exercises'
 
         if path_layer == 'about':
             page_id = 'about'

@@ -43,9 +43,10 @@ exercises_page_html = '''
     .save { color: #ddd; }
 
 .select_all_wrap { outline: 1px dotted red; margin-top: 15px; padding: 5px; }
+.select_all_wrap span { font-size: 12px; }
 
-    .button_wrap { display: inline-block; margin: 10px; border: 1px solid #aaa; border-radius: 3px; padding: 5px; width: 45px; text-align: center; cursor: pointer; font-size: 12px; font-family: 'Lato', sans-serif; background-color: white; }
-    .button_wrap:hover { border: 1px solid #444; }
+.button_wrap { display: inline-block; border: 1px solid #aaa; border-radius: 3px; padding: 2px; width: 40px; text-align: center; cursor: pointer; font-size: 12px; font-family: 'Lato', sans-serif; background-color: white; }
+.button_wrap:hover { border: 1px solid #444; }
 
     .search_welcome { background-color: rgba(255,255,255,0.9); padding: 15px; color: #000; }
 
@@ -59,7 +60,8 @@ exercises_page_html = '''
 
     form { display: inline-block; }
 
-    .found_count { position: fixed; right: 15px; bottom: 5px; }
+    .found_count { position: fixed; right: 15px; bottom: 10px; }
+    .found_number { text-align: center; font-size: 24px; }
 
     .muscle_targeted_filter .button_wrap { width: 50px; margin: 5px; }
 
@@ -75,7 +77,6 @@ exercises_page_html = '''
     .equipment_wrap { position: absolute; left: 15px; bottom: 10px; }
     
     .text_wrap ul { margin: 0; }
-
 
 
     @media screen and (max-width: 650px){
@@ -113,7 +114,7 @@ exercises_page_html = '''
       <div class="more_filters_wrap" ng-show="more_fliters=='yes'">
       
       
-       <div class="select_all_wrap">Select<br />
+       <div class="select_all_wrap"><span>Select</span>
          <div class="button_wrap"><label>
           <input type="checkbox" name="deselect_all" value="deselect_all" ng-click="deselect_all_muscles()" class="hide">None<br></label></div>
          <div class="button_wrap"><label>
@@ -204,7 +205,8 @@ exercises_page_html = '''
 
 
       <div class="found_count">
-      <p style="text-align:right;">[! (display_data| filter: select_name).length!] Exercise/s Found</p>
+        <div class="found_number">[! (display_data| filter: select_name).length!]</div>
+        <div>Exercise/s Found</div>
     </div>
     </div><!-- . sort_wrap - -->
       <hr>
