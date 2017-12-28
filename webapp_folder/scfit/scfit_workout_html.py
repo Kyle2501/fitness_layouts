@@ -50,14 +50,16 @@ exercises_page_html = '''
     .search_welcome { background-color: rgba(255,255,255,0.9); padding: 15px; color: #000; }
 
 
-    .sort_wrap { display: inline-block; font-size: 14px; background-color: rgba(255,255,255,0.9); padding: 10px; padding-left: 25px; color: #000; }
-    .show_more { display: inline-block; }
+    .sort_wrap { display: inline-block; font-size: 14px; background-color: rgba(255,255,255,0.9); padding: 10px; padding-left: 25px; color: #000; width: 100%; position: relative; font-size: 12px; border-right: 1px solid #eee; box-shadow: 0 1px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);  }
+    .sort_wrap input[type="text"] { width: 245px; height: 18px; }
+    
+    .show_more { display: inline-block; cursor: pointer; }
 
-    .input_group { display: inline-block; margin-left: 15px; }
+    .input_group { display: inline-block; margin-left: 15px; position: absolute; right: 15px; top: 5px; font-size: 14px; }
 
     form { display: inline-block; }
 
-    .found_count { display: inline-block; float: right; }
+    .found_count { position: fixed; right: 15px; bottom: 5px; }
 
     .muscle_targeted_filter .button_wrap { width: 50px; margin: 5px; }
 
@@ -96,7 +98,21 @@ exercises_page_html = '''
   <div id="exercise_wrap">
 
      <div class="select_category_wrap">
-       <div>Exercises: _</div>
+       <div><b>Exercises: _</b></div>
+       
+       <div class="show_more" ng-init="more_fliters='yes'">
+        <p ng-click="more_fliters='yes'" ng-show="more_fliters=='no'"><b>Show Filters &nbsp; <i class="fa fa-chevron-down" aria-hidden="true"></i></b></p>
+        <p ng-click="more_fliters='no'" ng-show="more_fliters=='yes'"><b>Hide Filters &nbsp;<i class="fa fa-chevron-up" aria-hidden="true"></i></b></p>
+      </div> <!-- . show_more -->
+       
+      <div class="show_less" ng-show="!hide_more_fliters&&small_window">
+        <hr>
+        <p ng-click='hide_more_fliters=true;'><b>Less Filters <i class="fa fa-chevron-up" aria-hidden="true"></i></b></p>
+      </div>  <!-- . show_less --> 
+
+      <div class="more_filters_wrap" ng-show="more_fliters=='yes'">
+      
+      
        <div class="select_all_wrap">Select<br />
          <div class="button_wrap"><label>
           <input type="checkbox" name="deselect_all" value="deselect_all" ng-click="deselect_all_muscles()" class="hide">None<br></label></div>
@@ -105,18 +121,8 @@ exercises_page_html = '''
             class="hide">All<br></label></div>
        </div><!-- . select_all_wrap - -->
 
-    
-      <div class="show_more" ng-init="more_fliters='yes'">
-        <p ng-click="more_fliters='yes'" ng-show="more_fliters=='no'"><b>Show Filters &nbsp; <i class="fa fa-chevron-down" aria-hidden="true"></i></b></p>
-        <p ng-click="more_fliters='no'" ng-show="more_fliters=='yes'"><b>Hide Filters &nbsp;<i class="fa fa-chevron-up" aria-hidden="true"></i></b></p>
-      </div> <!-- . show_more -->
 
-      <div class="show_less" ng-show="!hide_more_fliters&&small_window">
-        <hr>
-        <p ng-click='hide_more_fliters=true;'><b>Less Filters <i class="fa fa-chevron-up" aria-hidden="true"></i></b></p>
-      </div>  <!-- . show_less --> 
 
-      <div class="more_filters_wrap" ng-show="more_fliters=='yes'">
 
         <div class="muscle_targeted_filter" ng-init="muscle_show='yes'">
         <hr>
@@ -178,7 +184,7 @@ exercises_page_html = '''
     
 
     <form ng-submit='sel_by_name()'>
-        <label>Seach by Name:</label> &nbsp;
+        <div><label>Seach by Name:</label></div>
         <input type="text" placeholder="e.g. Push Ups" ng-model='select_name' ng-change='sel_by_name()'>
       </form>
 
