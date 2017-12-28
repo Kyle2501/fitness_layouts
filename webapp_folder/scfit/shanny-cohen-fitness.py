@@ -609,6 +609,7 @@ import fitness_page_code as html
 import scfit_public_page_code as public_html
 import scfit_account_page_code as account_html
 import scfit_manage_page_code as manage_html
+import scfit_workout_html as workout_html
 
 
 
@@ -1926,14 +1927,28 @@ class publicSite(webapp2.RequestHandler):
         data_id = ''
         sub_select = ''
         has_video = 'true'
+        
+        if path_layer == '':
+          html_file = 'fitness_front.html'
 
 # // - Sport Specific
+
+        if path_layer == 'classes':
+            page_id = 'sport_specific'
+            page_name = 'Sport Specific'
+            sub_select = 'snowboarding'
+            # page_html = page_header + public_html.sport_specific_snowboarding_page_code
+            page_html = ''
+            html_file = 'fitness_classes.html'
+
 
         if path_layer == 'sport_specific':
             page_id = 'sport_specific'
             page_name = 'Sport Specific'
             sub_select = 'snowboarding'
-            page_html = page_header + public_html.sport_specific_snowboarding_page_code
+            # page_html = page_header + public_html.sport_specific_snowboarding_page_code
+            page_html = ''
+            html_file = 'fitness_classes.html'
 
             if base == 'motocross':
                 sub_select = 'motocross'
@@ -1976,6 +1991,11 @@ class publicSite(webapp2.RequestHandler):
 
 # // - Programs Page
 
+        if path_layer == 'join':
+            page_id = 'programs'
+            page_name = 'Programs'
+            page_html = page_header + public_html.programs_page_html
+
         if path_layer == 'programs':
             page_id = 'programs'
             page_name = 'Programs'
@@ -1984,7 +2004,23 @@ class publicSite(webapp2.RequestHandler):
         if path_layer == 'results':
             page_id = 'results'
             page_name = 'Results'
-            page_html = page_header + public_html.results_page_html
+            # page_html = page_header + public_html.results_page_html
+            page_html = ''
+            html_file = 'fitness_results.html'
+            
+        if path_layer == 'trainers':
+            page_id = 'training'
+            page_name = 'Training'
+            # page_html = page_header + public_html.results_page_html
+            page_html = ''
+            html_file = 'fitness_training.html'
+        
+        if path_layer == 'training':
+            page_id = 'training'
+            page_name = 'Training'
+            # page_html = page_header + public_html.results_page_html
+            page_html = ''
+            html_file = 'fitness_training.html'
 
         if path_layer == 'exercises':
             page_id = 'exercises'
@@ -2000,7 +2036,9 @@ class publicSite(webapp2.RequestHandler):
         if path_layer == 'about':
             page_id = 'about'
             page_name = 'About'
-            page_html = page_header + public_html.about_page_html
+            # page_html = page_header + public_html.about_page_html
+            page_html = ''
+            html_file = 'about_page.html'
 
 
 # // - Contact Page
@@ -2720,6 +2758,7 @@ app = webapp2.WSGIApplication([    # - Pages
 
     ('/cam_test/?', publicSite),
     
+    ('/join/?', publicSite),
     ('/programs/?', publicSite),
       ('/confirm_signup/?', publicSite),
       ('/redirect2payment/?', redirect2Payment),
@@ -2751,9 +2790,13 @@ app = webapp2.WSGIApplication([    # - Pages
     ('/bikini_bootcamp/?', publicSite),
     ('/free_weekly/?', publicSite),
     ('/results/?', publicSite),
+    ('/trainers/?', publicSite),
+    ('/training/?', publicSite),
     ('/exercises/?', publicSite),
       ('/exercise_detail/?', publicSite),
     ('/about/?', publicSite),
+    ('/classes/?', publicSite),
+    ('/classes/?', publicSite),
     ('/sport_specific/?', publicSite),
       ('/sport_specific/motocross/?', publicSite),
       ('/sport_specific/skiing/?', publicSite),
@@ -2818,7 +2861,9 @@ app = webapp2.WSGIApplication([    # - Pages
     ('/publish/testimonial/?', publicSite),
     ('/publish/pg_workout/?', publicSite),
     ('/publish/sb_workout/?', publicSite),
-    ('/publish/template/?', publicSite), # - Admin
+    ('/publish/template/?', publicSite),
+
+# - Admin
 
     
     ('/manage/add_bikini_bootcamp/?', addBikiniBootcamp_db),

@@ -522,8 +522,8 @@ programs_page_html = '''
         </div><!-- . package_data - -->
         <div>
           <p class="sign_up_text">* Limited Spots Available</p>
-          <button class="sign_up_btn" ng-disabled='platinum_avail' ng-click=" confirm_signup('Platinum') ">Sign Up</button>
-          <button class="sign_up_btn" ng-disabled='!platinum_avail' ng-click=" add2waitlist('Platinum') ">Add to Waitlist</button>
+          <button class="sign_up_btn" !ng-disabled='platinum_avail' ng-click=" confirm_signup('Platinum') ">Sign Up</button>
+          <button class="sign_up_btn" !ng-disabled='!platinum_avail' ng-click=" add2waitlist('Platinum') ">Add to Waitlist</button>
         </div>
       </div><!-- . package_wrap - -->
 
@@ -542,8 +542,8 @@ programs_page_html = '''
         </div><!-- . package_data - -->
         <div>
           <p class="sign_up_text">* Limited Spots Available</p>
-          <button class="sign_up_btn" ng-disabled='gold_avail' ng-click=" confirm_signup('Gold') ">Sign Up</button>
-          <button class="sign_up_btn" ng-disabled='!gold_avail' ng-click=" add2waitlist('Gold') ">Add to Waitlist</button>
+          <button class="sign_up_btn" !ng-disabled='gold_avail' ng-click=" confirm_signup('Gold') ">Sign Up</button>
+          <button class="sign_up_btn" !ng-disabled='!gold_avail' ng-click=" add2waitlist('Gold') ">Add to Waitlist</button>
         </div>
       </div><!-- . package_wrap - -->
 
