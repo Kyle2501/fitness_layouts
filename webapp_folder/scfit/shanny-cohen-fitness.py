@@ -1985,13 +1985,13 @@ class publicSite(webapp2.RequestHandler):
             page_id = 'free_weekly'
             page_name = 'Free Weekly'
             page_html = page_header + public_html.free_weekly_page_html
-            nav_select = ''
+            nav_select = 'free_weekly'
         
         if path_layer == 'bikini_bootcamp':
             page_id = 'bikini_bootcamp'
             page_name = 'Bikini Bootcamp'
             page_html = page_header + public_html.bikini_bootcamp_page_html
-            nav_select = ''
+            nav_select = 'bikini_bootcamp'
         
 
 # // - Programs Page

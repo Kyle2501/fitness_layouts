@@ -39,8 +39,12 @@ exercises_page_html = '''
     .card_name { color: black; font-size: 14px; font-weight: bold; font-family: 'Cousine', sans-serif; border-right: 1px solid #eee; border-bottom: 1px solid #eee; position: absolute; left: 0; top: 0; right: 150px; padding: 10px; }
     .difficulty_level { position: absolute; top: 10px; right: 15px; }
     
-    
     .save { color: #ddd; }
+
+
+.show_more { display: inline-block; cursor: pointer; outline: 1px solid #aaa; width: 100%; margin-top: 15px; font-size: 14px; padding: 4px; color: #bbb; }
+.show_more div { text-align: center; }
+.show_more:hover { color: #777; }
 
 .select_all_wrap { outline: 1px dotted red; margin-top: 15px; padding: 5px; }
 .select_all_wrap span { font-size: 12px; }
@@ -54,8 +58,6 @@ exercises_page_html = '''
     .sort_wrap { display: inline-block; font-size: 14px; background-color: rgba(255,255,255,0.9); padding: 10px; padding-left: 25px; color: #000; width: 100%; position: relative; font-size: 12px; border-right: 1px solid #eee; box-shadow: 0 1px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);  }
     .sort_wrap input[type="text"] { width: 245px; height: 18px; }
     
-    .show_more { display: inline-block; cursor: pointer; }
-
     .input_group { display: inline-block; margin-left: 15px; position: absolute; right: 15px; top: 5px; font-size: 14px; }
 
     form { display: inline-block; }
@@ -102,8 +104,8 @@ exercises_page_html = '''
        <div><b>Exercises: _</b></div>
        
        <div class="show_more" ng-init="more_fliters='yes'">
-        <p ng-click="more_fliters='yes'" ng-show="more_fliters=='no'"><b>Show Filters &nbsp; <i class="fa fa-chevron-down" aria-hidden="true"></i></b></p>
-        <p ng-click="more_fliters='no'" ng-show="more_fliters=='yes'"><b>Hide Filters &nbsp;<i class="fa fa-chevron-up" aria-hidden="true"></i></b></p>
+        <div ng-click="more_fliters='yes'" ng-show="more_fliters=='no'"><b>OPEN FILTERS &nbsp; &#10706;<i class="fa fa-chevron-down" aria-hidden="true"></i></b></div>
+        <div ng-click="more_fliters='no'" ng-show="more_fliters=='yes'"><b>CLOSE FILTERS &nbsp; &#10711;<i class="fa fa-chevron-up" aria-hidden="true"></i></b></div>
       </div> <!-- . show_more -->
        
       <div class="show_less" ng-show="!hide_more_fliters&&small_window">

@@ -6,12 +6,16 @@
 account_nav_html = '''
   <nav class="main_nav">
     <ul>
+      <a href="../../my_account/"><li id="my_accountNav">My Account Home</li></a>
+      <br />
+      <a href="../../my_account/my_workout"><li id="my_workoutNav">My Workout</li></a>
+      <br />
       <a href="../../my_account/my_info"><li id="my_infoNav">My Info</li></a>
-      <a href="../../my_account/"><li id="my_accountNav">My Account</li></a>
       <a href="../../my_account/my_program"><li id="my_programNav">My Program</li></a>
       <a href="../../my_account/my_testimonial"><li id="my_testimonialNav">My Results</li></a>
-      <a href="../../my_account/my_workout"><li id="my_workoutNav">My Workout</li></a>
-      <a href="../../my_account/my_library"><li id="my_libraryNav">My Library</li></a>
+      <a !href="../../my_account/my_library"><li id="my_libraryNav">My Library</li></a>
+      <br />
+      <a href="../../programs"><li>Programs Page</li></a>
     </ul>
   </nav><!-- - /main_nav - -->
 '''

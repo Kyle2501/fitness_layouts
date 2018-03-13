@@ -16,7 +16,7 @@
   button:hover, input[type="submit"]:hover{ background-color: #eee; }
   button:disabled, input:disabled { background: #ddd; color:#aaa; }
 
-  .top_bar { position: fixed; left: 0; right: 0; top: 0; width:100%; z-index: 100;  height: 40px; padding-top: 10px; padding-bottom: 10px; }
+  .top_bar { position: fixed; left: 0; right: 0; top: 0; width:100%; z-index: 2000;  height: 40px; padding-top: 10px; padding-bottom: 10px; }
   .right_btn_wrap { position: fixed; top: 5px; right: 0; z-index: 175; }
   .black_bg { background: #000; border-bottom: 1px solid #ddd; }
   .white_bg { background: rgba(255,255,255,0.8); }
@@ -68,7 +68,7 @@
 
   .footer_bar-mobile { display: block; }
   .footer_bar-desktop { display: none; }
-  .footer_bar_wrap { position: fixed; bottom: 0; left: 0; right: 0; height: 40px; background-color: black; padding: 10px; }
+  .footer_bar_wrap { position: fixed; bottom: 0; left: 0; right: 0; height: 40px; background-color: black; padding: 10px; z-index: 2000; }
 
 .option_wrap { border-bottom: 1px solid #fff; padding: 25px; }
 .option_wrap a { color: #fff; }
@@ -302,6 +302,9 @@ demo.controller('Ctrl', function($scope, $http, $sce) {
   $scope.show_filters = 'no';
   $scope.show_gear = 'no';
   $scope.user_name = '{{ user_name }}';
+  
+  $scope.main_nav = 'no';
+  $scope.show_nav = 'no';
 
 
   $http({ method: 'GET', url: '/list_data?current_client'})
@@ -1925,9 +1928,11 @@ demo.controller('Ctrl', function($scope, $http, $sce) {
 .social_wrap a { color: #fff; padding-left: 15px; }
 .social_wrap a:hover { color: #444; }
 
-.nav_button_wrap { position: fixed; right: 15px; bottom: 15px; z-index: 210; cursor: pointer; }
+.nav_button_wrap { position: fixed; border: 1px solid #bbb; width: 40px; height: 40px; right: 15px; bottom: 10px; z-index: 210; cursor: pointer; }
 .nav_button_wrap .fa { font-size: 28px; color: red; }
-.hide_nav_button { position: fixed; right: 15px; bottom: 70px; cursor: pointer; }
+.hide_nav_button { position: absolute; left: 5px; top: 5px; cursor: pointer; font-size: 10px; font-family: monospace; padding: 5px; }
+.hide_nav_button:hover { outline: 1px dashed #ddd; }
+
 
 .mobile_nav_wrap { background-color: black; height: 245px; position: fixed; bottom: 60px; border-bottom: 1px solid #eee; left: 0; right: 0; }
 
@@ -1973,6 +1978,31 @@ header.hi { font-size: 16px; }
 .header_user_name { position: absolute; bottom: 10px; right: 25px; }
 
 .user_photo { display: inline-block; margin: 5px; width: 100px; }
+
+
+
+.footer_login_wrap { position: fixed; left: 15px; bottom: 10px; }
+
+.footer_login_wrap a { text-decoration: none; font-size: 14px; color: white; }
+.footer_login_wrap a:hover { text-decoration: underline; }
+
+.myaccount_footer a { display: block; font-size: 12px; letter-spacing: 0.08em; margin-bottom: 7px; color: steelblue; }
+
+.main_nav_button { border: 1px solid red; width: 40px; height: 40px; position: fixed; right: 15px; top: 10px; cursor: pointer; }
+
+.left_slide { background-color: #fc0; left: 0; right: 45%; top: 0; bottom: 0; z-index: 1500; position: fixed; }
+
+.left_slide .main_nav ul { margin-top: 105px; margin-right: 35px; }
+
+.left_slide .main_nav ul li { text-align: right; list-style: none; margin-bottom: 15px; font-size: 18px; }
+.left_slide .main_nav ul a { color: black; text-decoration: none; }
+
+.close_left { position: absolute; left: 10px; top: 70px; cursor: pointer; font-size: 10px; font-family: monospace; padding: 5px; }
+.close_left:hover { outline: 1px dashed #ddd; }
+
+.desktop_login_wrap { position: fixed; top: 5px; right: 10px; text-align: right; }
+.desktop_login_wrap a { text-decoration: none; color: #111; font-size: 14px;  }
+.desktop_login_wrap a:hover { text-decoration: underline; }
 
 
 @media (min-width: 500px) { 
@@ -2058,29 +2088,21 @@ ul.package_bullet { padding-left: 20px; }
     <a href="/"><div class="logo_wrap">SHANNY COHEN
       <div class="sub_title">FITNESS</div>
     </div><!-- .logo_wrap --></a>
-    <div class="login_wrap">
+    <div class="desktop_login_wrap" ng-show="layout_style=='desktop'">
       <a href="{{ login_key }}">{{ gate }}</a>
+      {% if user_name != 'No User' %}<div class="myaccount_desktop">
+      <a href="/my_account">{{ user_name }}</a></div>{% endif %}
     </div>
-    <div class="right_btn_wrap">
-      <div class="dropdown">
-        <div class="dropbtn" ><i class="fa fa-user" aria-hidden="true"></i></div>
-        <div class="dropdown-content">
-          {% if user_name != 'No User' %}
-            <p>{{ user_name }}</p> 
-            <a href="/my_account">My Account</a>
-          {% endif %}
-          {% if admin == 'true' %}
-            <a href="/manage">Admin Manage</a>
-          {% endif %}
-          <a href="{{ login_key }}">{{ gate }}</a>
-        </div><!-- - .dropdown-content - -->
-      </div><!-- - .dropdown - -->
-    </div><!-- .right_btn_wrap -->
-    {% if user_name != 'No User' %}
-    <div class="myaccount_wrap"><a href="/my_account">{{ user_name }}</a></div>
-    {% endif %}
+    
+    <div class="nav_button_mobile" ng-show="layout_style=='mobile'">
+      <div class="main_nav_button" ng-show="main_nav=='no'" ng-click="main_nav='yes'"></div>
+      <div class="main_nav_button" ng-show="main_nav=='yes'" ng-click="main_nav='no'"></div>
+    </div>
   </div><!-- - .top_bar - -->
-
+  <aside class="left_slide" ng-show="main_nav=='yes'">
+    <div class="close_left" ng-click="main_nav='no'">close</div>
+    <div class="main_nav">{{ nav_html|safe }}</div>
+  </aside>
   <aside class="left_aside" ng-show="layout_style=='desktop'">
     {{ nav_html|safe }}
     {% if user_name != 'No User' %}
@@ -2119,7 +2141,6 @@ ul.package_bullet { padding-left: 20px; }
   <div class="footer_bar_wrap footer_bar-[!layout_style!]">
     <div class="mobile_nav_wrap" ng-show="show_nav=='yes'">
       <div class="mobile_nav_data">
-        {{ nav_html|safe }}
         
         {% if user_name != 'No User' %}
     <div class="footer_admin_link">
@@ -2127,13 +2148,20 @@ ul.package_bullet { padding-left: 20px; }
       &nbsp; | &nbsp;{% endif %}
       <a href="../../my_account">My Account</a>
     </div>{% endif %}
-        <div class="hide_nav_button" ng-click="show_nav='no'">hide</div>
+        <div class="hide_nav_button" ng-click="show_nav='no'">close</div>
       </div><!-- . mobile_nav_data - -->
     </div><!-- . mobile_nav_wrap - -->
     
-    <div class="nav_button_wrap">
-      <span ng-click="show_nav='yes'">Nav<i class="fa fa-bars" aria-hidden="true"></i></span>
+    <div class="footer_login_wrap">
+    {% if user_name != 'No User' %}
+    <div class="myaccount_footer"><a href="/my_account">{{ user_name }}</a></div>
+    {% endif %}
+    
+      <a href="{{ login_key }}">{{ gate }}</a>
     </div>
+    
+    <div class="nav_button_wrap" ng-show="show_nav=='no'" ng-click="show_nav='yes'"></div>
+    <div class="nav_button_wrap" ng-show="show_nav=='yes'" ng-click="show_nav='no'"></div>
   </div><!-- . footer_bar_wrap - -->
 
 </body>
